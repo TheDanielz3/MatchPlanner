@@ -6,12 +6,12 @@
 A new way to e-sport
 
 ## Motivational quote
-When one does great, others are inspired. When one fails, others are affected.
+The past can't be changed. But the future is yet in your hands.
 
 ## Autores
-Daniel Correia Batista
+Daniel Correia Batista (2171836)
 
-Diogo Cruz Apendre
+Diogo Cruz Apendre (2170324)
 
 
 
