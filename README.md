@@ -10,6 +10,7 @@ The past can't be changed. But the future is yet in your hands.
 
 ## Autores
 Daniel Correia Batista (2171836)
+
 Diogo Cruz Apendre (2170324)
 
 
