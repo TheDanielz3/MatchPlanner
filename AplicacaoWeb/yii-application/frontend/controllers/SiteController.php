@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use Yii;
@@ -211,5 +212,11 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    //MatchPlanner
+    public function actionMp()
+    {
+        return $this->render('mp');
     }
 }
