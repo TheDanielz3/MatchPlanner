@@ -4,21 +4,18 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Userprofiles */
+/* @var $model frontend\models\Events */
 
-$this->title = 'Insert solo user information';
-$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
+$this->title = 'Create Events';
+$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="userprofiles-create">
+<div class="events-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
-
     <?= $this->render('_form', [
         'model' => $model,
-        'id' => $id
     ]) ?>
 
 </div>

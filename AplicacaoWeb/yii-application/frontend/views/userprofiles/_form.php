@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sex')->textInput() ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'user_id')->textInput(['value' => $id, 'readonly' => true]) ?>
 
     <?= $form->field($model, 'team_id')->textInput() ?>
 

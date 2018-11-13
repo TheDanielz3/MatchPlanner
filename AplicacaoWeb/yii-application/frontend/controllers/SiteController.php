@@ -88,7 +88,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->render('operations');
         } else {
             $model->password = '';
 
@@ -213,9 +213,17 @@ class SiteController extends Controller
         ]);
     }
 
+    //Vistas do projeto matchplanner
+
     public function actionMatch()
     {
         //Vai buscar página de escolha de perfil
         return $this->render('match');
+    }
+
+    public function actionOperations()
+    {
+        //Mostra a vista "Main" do matchplanner
+        return $this->render('operations');
     }
 }

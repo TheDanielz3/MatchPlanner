@@ -2,18 +2,17 @@
 
 namespace frontend\controllers;
 
-use common\models\User;
 use Yii;
-use frontend\models\Userprofiles;
-use frontend\models\UserprofilesSearch;
+use frontend\models\Events;
+use frontend\models\EventsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserprofilesController implements the CRUD actions for Userprofiles model.
+ * EventsController implements the CRUD actions for Events model.
  */
-class UserprofilesController extends Controller
+class EventsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,12 @@ class UserprofilesController extends Controller
     }
 
     /**
-     * Lists all Userprofiles models.
+     * Lists all Events models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserprofilesSearch();
+        $searchModel = new EventsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class UserprofilesController extends Controller
     }
 
     /**
-     * Displays a single Userprofiles model.
+     * Displays a single Events model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,15 +58,13 @@ class UserprofilesController extends Controller
     }
 
     /**
-     * Creates a new Userprofiles model.
+     * Creates a new Events model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Userprofiles();
-        $id = Yii::$app->user->identity->getId();
-        //var_dump($id);
+        $model = new Events();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,12 +72,11 @@ class UserprofilesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'id' => $id
         ]);
     }
 
     /**
-     * Updates an existing Userprofiles model.
+     * Updates an existing Events model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,7 +96,7 @@ class UserprofilesController extends Controller
     }
 
     /**
-     * Deletes an existing Userprofiles model.
+     * Deletes an existing Events model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +110,15 @@ class UserprofilesController extends Controller
     }
 
     /**
-     * Finds the Userprofiles model based on its primary key value.
+     * Finds the Events model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Userprofiles the loaded model
+     * @return Events the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Userprofiles::findOne($id)) !== null) {
+        if (($model = Events::findOne($id)) !== null) {
             return $model;
         }
 

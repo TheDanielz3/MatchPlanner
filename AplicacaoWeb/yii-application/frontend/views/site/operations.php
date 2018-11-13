@@ -5,11 +5,11 @@
 
     //Esta vista server para selecionar o tipo de perfil desejado
 
-    $solo = Url::toRoute('userprofiles/create');
-    $team = Url::toRoute('teamprofiles/create');
+    $perfil = Url::toRoute('userprofiles/view');
+    $criarEvento = Url::toRoute('events/create');
     echo "<br/>";
-    echo "" . Html::a('Solo', $solo);
+    echo "" . Html::a('Ver perfil', $perfil);
     echo "<br/>";
-    echo "" . Html::a('Team', $team);
-    
+    echo "" . Html::a('Criar evento', $criarEvento);
+
 ?>
