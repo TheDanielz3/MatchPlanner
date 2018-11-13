@@ -1,5 +1,4 @@
 <?php
-
 namespace frontend\controllers;
 
 use Yii;
@@ -155,7 +154,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                    return $this->render('match');
                 }
             }
         }
@@ -214,9 +213,9 @@ class SiteController extends Controller
         ]);
     }
 
-    //MatchPlanner
-    public function actionMp()
+    public function actionMatch()
     {
-        return $this->render('mp');
+        //Vai buscar página de escolha de perfil
+        return $this->render('match');
     }
 }

@@ -39,20 +39,27 @@ class SignupForm extends Model
     /**
      * Signs user up.
      *
-     * @return Users|null the saved model or null if saving fails
+     * @return User|null the saved model or null if saving fails
      */
     public function signup()
     {
-        if (!$this->validate()) {
-            return null;
+        if ($this->validate())
+        {
+            $user = new User();
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            $user->save(false);
+
+            // the following three lines were added:
+            $auth = \Yii::$app->authManager;
+            $authorRole = $auth->getRole('user');
+            $auth->assign($authorRole, $user->getId());
+
+            return $user;
         }
-        
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+
+        return null;
     }
 }
