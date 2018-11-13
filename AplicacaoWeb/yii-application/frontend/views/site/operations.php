@@ -11,4 +11,5 @@
     echo "" . Html::a('Solo', $solo);
     echo "<br/>";
     echo "" . Html::a('Team', $team);
+    
 ?>
