@@ -20,8 +20,14 @@ class PessoaTest extends \Codeception\Test\Unit
     // tests
     public function testSomeFeature()
     {
+    }
+
+    public function testPessoaData()
+    {
         $pessoa = new Pessoa();
 
-        $pessoa->Nome;
+        $pessoa->Idade = 123456788999;
+
+        $this->assertTrue($pessoa->validate(['idade']));
     }
 }
