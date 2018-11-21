@@ -108,8 +108,6 @@ class m181112_181648_init_rbac extends Migration
         $auth->addChild($user, $readComment);
         $auth->addChild($user, $updateOwnComment);
         $auth->addChild($user, $deleteOwnComment);
-
-
     }
 
     public function down()

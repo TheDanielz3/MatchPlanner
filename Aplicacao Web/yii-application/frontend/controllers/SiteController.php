@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\Event;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -87,7 +88,8 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if($model->load(Yii::$app->request->post()) && $model->login())
+        {
             return $this->render('operations');
         } else {
             $model->password = '';
@@ -151,6 +153,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -223,6 +226,10 @@ class SiteController extends Controller
 
     public function actionOperations()
     {
+
+
+
+
         //Mostra a vista "Main" do matchplanner
         return $this->render('operations');
     }
