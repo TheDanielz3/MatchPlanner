@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 13, 2018 at 02:18 PM
+-- Generation Time: Nov 22, 2018 at 12:55 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -42,12 +42,17 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('user', '10', 1542059104),
-('user', '11', 1542059149),
-('user', '12', 1542059350),
-('user', '13', 1542060380),
-('user', '8', 1542047429),
-('user', '9', 1542058328);
+('user', '13', 1542649294),
+('user', '14', 1542651416),
+('user', '15', 1542652182),
+('user', '16', 1542655312),
+('user', '17', 1542729295),
+('user', '18', 1542729380),
+('user', '19', 1542730003),
+('user', '20', 1542731492),
+('user', '21', 1542807257),
+('user', '22', 1542808215),
+('user', '23', 1542823953);
 
 -- --------------------------------------------------------
 
@@ -138,11 +143,11 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `content` varchar(1000) NOT NULL,
   `tag` varchar(70) NOT NULL,
@@ -152,46 +157,40 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(10) NOT NULL,
   `event_id` int(10) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `team_id` (`team_id`),
   KEY `event_id` (`event_id`),
-  KEY `post_id` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `content`, `tag`, `create_time`, `user_id`, `team_id`, `post_id`, `event_id`) VALUES
-(1, 'Diogo', 'asAS', '2018-10-30 00:00:00', NULL, NULL, 1, 1);
+  KEY `post_id` (`post_id`),
+  KEY `user_id` (`user_id`),
+  KEY `team_id` (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events`
+-- Table structure for table `event`
 --
 
-DROP TABLE IF EXISTS `events`;
-CREATE TABLE IF NOT EXISTS `events` (
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE IF NOT EXISTS `event` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `event_name` varchar(50) NOT NULL,
   `begin_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `description` varchar(500) NOT NULL,
-  `user_id` int(10) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `team_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `team_id` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `events`
+-- Dumping data for table `event`
 --
 
-INSERT INTO `events` (`id`, `event_name`, `begin_date`, `end_date`, `description`, `user_id`, `team_id`) VALUES
-(1, 'Jogo SCP- SLB', '2018-10-30 12:12:00', '2018-10-30 14:12:00', 'dERBI DA ANO', NULL, NULL),
-(2, 'Outro', '2012-03-12 00:00:00', '2012-03-14 00:00:00', 'oUTRO EVENTO', NULL, NULL);
+INSERT INTO `event` (`id`, `event_name`, `begin_date`, `end_date`, `description`, `user_id`, `team_id`) VALUES
+(4, 'Good Nightttt', '2018-03-04 10:03:00', '2018-03-04 12:12:00', 'gdfvxdvvfddd', 22, NULL),
+(5, 'Evento da vida', '2018-11-21 00:11:00', '2018-11-21 00:12:00', 'Tuamaehvukgb', 22, NULL),
+(6, 'Festa', '2018-11-04 10:11:00', '2018-11-10 03:11:00', 'Festas', 22, NULL);
 
 -- --------------------------------------------------------
 
@@ -219,11 +218,11 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Table structure for table `post`
 --
 
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE IF NOT EXISTS `posts` (
+DROP TABLE IF EXISTS `post`;
+CREATE TABLE IF NOT EXISTS `post` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(70) NOT NULL,
   `content` varchar(1000) NOT NULL,
@@ -233,39 +232,33 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `team_id` int(10) DEFAULT NULL,
   `event_id` int(10) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `event_id` (`event_id`),
   KEY `user_id` (`user_id`),
-  KEY `team_id` (`team_id`),
-  KEY `event_id` (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `title`, `content`, `tag`, `create_time`, `user_id`, `team_id`, `event_id`) VALUES
-(1, 'Verdades da vida', 'Verdades', '#everdade', '2018-10-30 00:00:00', 1, NULL, 1),
-(2, 'Outro post', 'Post', '#scp', '2018-10-30 00:00:00', 1, NULL, 1);
+  KEY `team_id` (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teamprofiles`
+-- Table structure for table `teamprofile`
 --
 
-DROP TABLE IF EXISTS `teamprofiles`;
-CREATE TABLE IF NOT EXISTS `teamprofiles` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `teamprofile`;
+CREATE TABLE IF NOT EXISTS `teamprofile` (
+  `id` int(10) NOT NULL,
   `team_name` varchar(100) NOT NULL,
   `members` varchar(1200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `teamprofiles`
+-- Dumping data for table `teamprofile`
 --
 
-INSERT INTO `teamprofiles` (`id`, `team_name`, `members`) VALUES
-(2, 'Strilex', 'Daniel Batista, Diogo Alpendre');
+INSERT INTO `teamprofile` (`id`, `team_name`, `members`, `user_id`) VALUES
+(22, 'Your MOM', 'Tua prima,tua mae', 22);
 
 -- --------------------------------------------------------
 
@@ -288,55 +281,53 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'teste12345', 'e0rsb2Fl2gUqGjH42gVopviGzqB_GgQt', '$2y$13$Xx3tyRmpPzRFnvGPQsmwBOC1kaVxu0dcoim/H0K6XbIaOvnNEvnky', NULL, 'slkdsfljfn@kfnslk.com', 10, 1541517652, 1541517652),
-(2, 'equipatop', 'koYgUN93EaudE2zgP99ay_GKLrZVMA72', '$2y$13$tULE70X/JmINXM4btGCuvuTkpX1QjKAfGP8epnsr15pAuh1U32kHG', NULL, 'equipatop@gmail.com', 10, 1542042277, 1542042277),
-(3, 'sdadsd', 'nhzK3tObIoy3icyDLbRHsWfrCGEQO82S', '$2y$13$KRUYtNZmDYvSFzS6KN8APenTdoLvC0XZBTct2/dx8lmVzeaBWYgr2', NULL, 'sasdasd@gmail.com', 10, 1542042294, 1542042294),
-(4, 'dalpendre', 'n5h7AA2oTjwDLNxkyVWAM3V8fg4rfENG', '$2y$13$pAalu9stWbDZ4C7IOk.5d.GGOjlOrI/xghgfraCoa8qPLKBfDwYnK', NULL, 'dalpendre1999@gmail.com', 10, 1542042382, 1542042382),
-(5, 'pantera', 'ax34pI2PpjwYEKjzGE8nLMAuH8ZWTPX2', '$2y$13$PHZsstpDt7pzVSHqhIFe4uQYL9rCpBs8PR.9aaCjJYAAAZq9wXGW.', NULL, 'pantera@gmail.com', 10, 1542042576, 1542042576),
-(6, 'diogoalpendre1999', 'SySHa-xmxFjrIDy4qRAbXIXgBdA79E2h', '$2y$13$PLBlpqKpcLoy4loM9JKC0OLfkgVy.h4ZnnmJAiLrIcPQU57LuxutO', NULL, 'guy@gmail.com', 10, 1542043728, 1542043728),
-(7, 'megadeth', '7pe8IE5yYD-RS2RYdAPsrURmWGmxTIcF', '$2y$13$u0Idv14vV9.8qskZA.Av/.XlfJ1tPBFZxAdI4aJnBlT4gb8ptYtku', NULL, 'megadeth1999@gmail.com', 10, 1542043939, 1542043939),
-(8, 'daniel1999', 'C7zrFCYlKvkiKahlD1zFgpX_0YwRfcJV', '$2y$13$1nieTRfOirqJJz8ZSz0M3uDxOFjdnQaGYbbwWv1Q9IxzKAQASlwW.', NULL, 'daniel1234@gmail.com', 10, 1542047429, 1542047429),
-(9, 'utilizador', 'h6lLOgDyVkhfnaN409d6cb2VpvFOugDV', '$2y$13$NULWXQBsSUfSVkmHoAzeLOtp.f06vjngPgj0o4Mcb1X3hlVJYLULe', NULL, 'utilizador@gmail.com', 10, 1542058328, 1542058328),
-(10, 'utilizador1999', 'z9JHOXj8besZT4s06bcd3y1Q9YwIBKAn', '$2y$13$EKQ9lK5k8.16H1Ya7fHkkusC0G.3Uk0AaOIy4wA5L0rPO2Kxo1F6.', NULL, 'utilizador1999@gmail.com', 10, 1542059104, 1542059104),
-(11, 'dalpendre12345', 'P8eZmkzjDC22avGJ6YJbQyWxRn3Z0JRz', '$2y$13$E21P65KY74ILqLHsJMwB8uroiZyLzWYVZ6nQjjeWSF8CpZdyvGepC', NULL, 'dalpendre12345@gmail.com', 10, 1542059149, 1542059149),
-(12, 'diogo1999', 'jG60alZh9JK1F1e7NPT6PpalZhMHDqH2', '$2y$13$qN9X7VKPjng3OGVMGNemweaOOXfYgdhcfv/1hVnUQyLL3wvPAWdwm', NULL, 'diogo1999@gmail.com', 10, 1542059350, 1542059350),
-(13, 'utilizador2018', 'Y0JlWubl3R6T4vJ5lCxjGIn4WzcqLG5O', '$2y$13$09Y/ertraQoMC64u0VF4jeDNeY3yoI8vofmzPWiEgLTSYGC7aYYIu', NULL, 'utilizador2018@gmail.com', 10, 1542060380, 1542060380);
+(13, 'diogo', 'aSdJ0XhN7chi3q5L12lfq7Ze3_E5cwmM', '$2y$13$KAYZf30LxEKyrFCqGUlL7uCLXNwr7dEUbXIvlx301NS0rPRFxZEli', NULL, 'diogo@gmail.com', 10, 1542649294, 1542649294),
+(14, 'daniel1234', '4_2pxjWvTGShBR3pwKgUlPd44H0BYNBl', '$2y$13$h9DA8AvnEfVOMR8CkFV/.eOwPj5Gcb3oSt93q1ABBWW3noho0RQqi', NULL, 'daniel@gmail.com', 10, 1542651416, 1542651416),
+(15, 'diogoalpendre', 'XgaT9CR31eq-gwleNs8Ch9T3LXhwgrGp', '$2y$13$uCooeibmIUamvWu5Ybb9H.MxFMHbn.HpFjqQSod7WmJhG1VN0k7Ou', NULL, 'dijkjhkjhkogo@gmail.com', 10, 1542652182, 1542652182),
+(16, 'daniel12345', 'EvXzTSVq7JyCOy3k3O0qxl6UGkSA2Gd_', '$2y$13$ybKOOEDAvzBiY8I.MuUey.Ox.TbAPER/p3f5C6CzITZPXaM1YK6K2', NULL, 'daniel12345@gmail.com', 10, 1542655310, 1542655310),
+(17, 'YIIIIII', '_zJe5uusIfuNFNAbov-yDxlSMOBhvYR1', '$2y$13$6YKmu7fX4mV.SICitteA3e3UVVm5n82g1f2r34tsQvjX4vGCjnqZ2', NULL, 'yiiiiiiiiiiiiii@gmaim.com', 10, 1542729295, 1542729295),
+(18, 'dalpendre', 'wm5GgyJbChEJHBkWTmV9YzeRteZGNu7D', '$2y$13$UDkN6YE4nKma4GRUDp5FQuk51.FxbUQ35f2mD3ahpwe0hV3zedozq', NULL, 'dalpendre1999@gmail.com', 10, 1542729380, 1542729380),
+(19, 'dalpendre1999', '5qgjj95TFXwbzBBdszUetbHMYiQT7wc0', '$2y$13$QRajxJ5UfMVRFvTSQSDmQeQOhVF2dk.k7RrrJ9zVOSX09ZDxCQ8pe', NULL, 'dalpendre19999@gmail.com', 10, 1542730003, 1542730003),
+(20, 'tuamae', 'FyeKo1yeoamiGLzS7iJuP5e_Oa3dlZOo', '$2y$13$hjX1OjnGlBsYYUuySIDRk.6JRIYRYZXNDMA8Y2HrejmbOngBz/8rC', NULL, 'tuamae@tuamae.com', 10, 1542731492, 1542731492),
+(21, 'tuaprima', 'mBAJr0vkrZk_Cea-vi94WOXv4HVEtMw-', '$2y$13$70FZFXucsp4ja4B8Vr/RFuKyG/qETJRWia4mkPTADaZx2JhT9GhoO', NULL, 'tuaprima@tuaprima.com', 10, 1542807257, 1542807257),
+(22, 'teupai', 'tuCZQFyPI0gEAE2Qt833r_iFxe2G5YV-', '$2y$13$.G3Auy10/jGeuoOhwG6HJOfiVgDy0vAV5isb0sl3CtrWtbiPsbaB2', NULL, 'teupai@tudoputa.com', 10, 1542808215, 1542808215),
+(23, 'digooalpendre', 'oKCZQa9_AsxGh2jBDA8HXFFL7odRnrkR', '$2y$13$00Mq.NVsO7cuLNDOMUnQBOKgAKVbiE.YmNJOo3fdf3wU4W/JVtcqK', NULL, 'diogoalpendre@gmail.com', 10, 1542823953, 1542823953);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userprofiles`
+-- Table structure for table `userprofile`
 --
 
-DROP TABLE IF EXISTS `userprofiles`;
-CREATE TABLE IF NOT EXISTS `userprofiles` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `userprofile`;
+CREATE TABLE IF NOT EXISTS `userprofile` (
+  `id` int(10) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `surnames` varchar(50) NOT NULL,
   `birthdate` date NOT NULL,
   `sex` tinyint(1) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `team_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
   KEY `team_id` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `userprofiles`
+-- Dumping data for table `userprofile`
 --
 
-INSERT INTO `userprofiles` (`id`, `firstname`, `surnames`, `birthdate`, `sex`, `user_id`, `team_id`) VALUES
-(1, 'Diogo', 'Alpendre', '1999-03-04', 1, 0, NULL),
-(2, 'dpjsj', 'klsnmfnsdkjn', '2018-10-30', 1, 0, NULL),
-(3, 'Diogo', 'Alpendre', '2018-03-04', 1, 0, NULL),
-(4, 'Diogo', 'Alpendre', '1999-03-04', 1, 0, NULL);
+INSERT INTO `userprofile` (`id`, `firstname`, `surnames`, `birthdate`, `sex`, `user_id`, `team_id`) VALUES
+(20, 'tua mae', 'de quarto', '2018-12-23', 1, 20, NULL),
+(21, 'gfvcvvc', 'fdfd', '2018-12-23', 1, 21, NULL),
+(22, 'Diogo', 'Alpendre', '1923-12-23', 1, 22, NULL);
 
 --
 -- Constraints for dumped tables
@@ -362,34 +353,41 @@ ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `comments`
+-- Constraints for table `comment`
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userprofiles` (`id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `teamprofiles` (`id`),
-  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
-  ADD CONSTRAINT `comments_ibfk_4` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
+  ADD CONSTRAINT `comment_ibfk_4` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
+  ADD CONSTRAINT `comment_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `comment_ibfk_6` FOREIGN KEY (`team_id`) REFERENCES `teamprofile` (`id`);
 
 --
--- Constraints for table `events`
+-- Constraints for table `event`
 --
-ALTER TABLE `events`
-  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userprofiles` (`id`),
-  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `teamprofiles` (`id`);
+ALTER TABLE `event`
+  ADD CONSTRAINT `event_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `event_ibfk_4` FOREIGN KEY (`team_id`) REFERENCES `teamprofile` (`id`);
 
 --
--- Constraints for table `posts`
+-- Constraints for table `post`
 --
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userprofiles` (`id`),
-  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `teamprofiles` (`id`),
-  ADD CONSTRAINT `posts_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`);
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
+  ADD CONSTRAINT `post_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `post_ibfk_5` FOREIGN KEY (`team_id`) REFERENCES `teamprofile` (`id`);
 
 --
--- Constraints for table `userprofiles`
+-- Constraints for table `teamprofile`
 --
-ALTER TABLE `userprofiles`
-  ADD CONSTRAINT `userprofiles_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `teamprofiles` (`id`);
+ALTER TABLE `teamprofile`
+  ADD CONSTRAINT `teamprofile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `userprofile`
+--
+ALTER TABLE `userprofile`
+  ADD CONSTRAINT `userprofile_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `userprofile_ibfk_3` FOREIGN KEY (`team_id`) REFERENCES `teamprofile` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
