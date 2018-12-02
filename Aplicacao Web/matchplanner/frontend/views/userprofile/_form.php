@@ -34,12 +34,13 @@ $id = Yii::$app->user->identity->getId();
     ]);?>
 
     <?= $form->field($model, 'sex')->dropDownList(
-        ['0' => 'F', '1' => 'M']
+        ['F', 'M']
     ); ?>
 
-    <?= $form->field($model, 'user_id')->hiddenInput(['value'=> $id, 'readonly' => true])->label(false) ?>
+    <?= $form->field($model, 'user_id')->textInput(['value'=> $id, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'team_id')->hiddenInput()->label(false) ?>
+    //TODO: Ver pq está a aprecer inválida
+    <?= $form->field($model, 'team_id')->textInput(['value'=> $id, 'readonly' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

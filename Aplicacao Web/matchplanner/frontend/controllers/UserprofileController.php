@@ -65,16 +65,13 @@ class UserprofileController extends Controller
     public function actionCreate()
     {
         $model = new Userprofile();
-         $id = Yii::$app->user->identity->getId();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['site/operations', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'id' => $id,
-
         ]);
     }
 

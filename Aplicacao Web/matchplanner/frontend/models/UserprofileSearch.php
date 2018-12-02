@@ -18,8 +18,8 @@ class UserprofileSearch extends Userprofile
     public function rules()
     {
         return [
-            [['id', 'sex', 'user_id', 'team_id'], 'integer'],
-            [['firstname', 'surnames', 'birthdate'], 'safe'],
+            [['id', 'user_id', 'team_id'], 'integer'],
+            [['firstname', 'surnames', 'birthdate', 'sex'], 'safe'],
         ];
     }
 
@@ -61,13 +61,13 @@ class UserprofileSearch extends Userprofile
         $query->andFilterWhere([
             'id' => $this->id,
             'birthdate' => $this->birthdate,
-            'sex' => $this->sex,
             'user_id' => $this->user_id,
             'team_id' => $this->team_id,
         ]);
 
         $query->andFilterWhere(['like', 'firstname', $this->firstname])
-            ->andFilterWhere(['like', 'surnames', $this->surnames]);
+            ->andFilterWhere(['like', 'surnames', $this->surnames])
+            ->andFilterWhere(['like', 'sex', $this->sex]);
 
         return $dataProvider;
     }

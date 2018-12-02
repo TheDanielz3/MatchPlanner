@@ -11,7 +11,7 @@ use Yii;
  * @property string $firstname
  * @property string $surnames
  * @property string $birthdate
- * @property int $sex
+ * @property string $sex
  * @property int $user_id
  * @property int $team_id
  *
@@ -35,9 +35,10 @@ class Userprofile extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'firstname', 'surnames', 'birthdate', 'sex'], 'required'],
-            [['id', 'sex', 'user_id', 'team_id'], 'integer'],
+            [['id', 'user_id', 'team_id'], 'integer'],
             [['birthdate'], 'safe'],
             [['firstname', 'surnames'], 'string', 'max' => 50],
+            [['sex'], 'string', 'max' => 1],
             [['id'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teamprofile::className(), 'targetAttribute' => ['team_id' => 'id']],

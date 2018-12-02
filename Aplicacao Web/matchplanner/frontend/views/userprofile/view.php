@@ -4,13 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 
-
-//Link para voltar à main view
-$mainView = Url::toRoute('site/operations', true);
-echo "<br/>";
-echo "" . Html::a('Go back to main view', $mainView);
-
-$id = Yii::$app->user->identity->getId();
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Userprofile */
 
@@ -36,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'firstname',
             'surnames',
             'birthdate',
             'sex',
-            'user_id',
-            'team_id',
+            //'user_id',
+            //'team_id',
         ],
     ]) ?>
 
