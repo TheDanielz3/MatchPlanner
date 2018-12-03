@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 22, 2018 at 12:55 PM
+-- Generation Time: Dec 03, 2018 at 01:22 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -52,7 +52,27 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('user', '20', 1542731492),
 ('user', '21', 1542807257),
 ('user', '22', 1542808215),
-('user', '23', 1542823953);
+('user', '23', 1542823953),
+('user', '24', 1543251067),
+('user', '25', 1543259296),
+('user', '26', 1543260600),
+('user', '27', 1543260627),
+('user', '28', 1543416116),
+('user', '29', 1543422361),
+('user', '30', 1543424982),
+('user', '31', 1543425070),
+('user', '32', 1543425165),
+('user', '33', 1543426335),
+('user', '34', 1543427664),
+('user', '35', 1543427778),
+('user', '36', 1543427856),
+('user', '37', 1543593560),
+('user', '38', 1543608013),
+('user', '39', 1543608894),
+('user', '40', 1543609065),
+('user', '41', 1543609433),
+('user', '42', 1543842858),
+('user', '43', 1543843198);
 
 -- --------------------------------------------------------
 
@@ -181,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `team_id` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `event`
@@ -190,7 +210,11 @@ CREATE TABLE IF NOT EXISTS `event` (
 INSERT INTO `event` (`id`, `event_name`, `begin_date`, `end_date`, `description`, `user_id`, `team_id`) VALUES
 (4, 'Good Nightttt', '2018-03-04 10:03:00', '2018-03-04 12:12:00', 'gdfvxdvvfddd', 22, NULL),
 (5, 'Evento da vida', '2018-11-21 00:11:00', '2018-11-21 00:12:00', 'Tuamaehvukgb', 22, NULL),
-(6, 'Festa', '2018-11-04 10:11:00', '2018-11-10 03:11:00', 'Festas', 22, NULL);
+(6, 'Festa', '2018-11-04 10:11:00', '2018-11-10 03:11:00', 'Festas', 22, NULL),
+(7, 'lsamlasksmklsmklmslaml', '2018-11-26 09:11:00', '2018-11-26 01:11:00', 'mdsamdmkskmsas', 26, NULL),
+(8, 'sadasasadasd', '2018-11-28 05:11:00', '2018-11-28 07:11:00', 'dasadsaasdads', 28, NULL),
+(9, 'mdsklamld', '2018-11-28 09:11:00', '2018-11-28 09:11:00', 'lkasldnsakdlsmakl', 29, NULL),
+(10, 'smadlmalmsdlamld', '2018-11-28 05:11:00', '2018-11-28 15:11:00', 'fknejosfnsifdf', 28, NULL);
 
 -- --------------------------------------------------------
 
@@ -253,13 +277,6 @@ CREATE TABLE IF NOT EXISTS `teamprofile` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `teamprofile`
---
-
-INSERT INTO `teamprofile` (`id`, `team_name`, `members`, `user_id`) VALUES
-(22, 'Your MOM', 'Tua prima,tua mae', 22);
-
 -- --------------------------------------------------------
 
 --
@@ -281,24 +298,35 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(13, 'diogo', 'aSdJ0XhN7chi3q5L12lfq7Ze3_E5cwmM', '$2y$13$KAYZf30LxEKyrFCqGUlL7uCLXNwr7dEUbXIvlx301NS0rPRFxZEli', NULL, 'diogo@gmail.com', 10, 1542649294, 1542649294),
-(14, 'daniel1234', '4_2pxjWvTGShBR3pwKgUlPd44H0BYNBl', '$2y$13$h9DA8AvnEfVOMR8CkFV/.eOwPj5Gcb3oSt93q1ABBWW3noho0RQqi', NULL, 'daniel@gmail.com', 10, 1542651416, 1542651416),
-(15, 'diogoalpendre', 'XgaT9CR31eq-gwleNs8Ch9T3LXhwgrGp', '$2y$13$uCooeibmIUamvWu5Ybb9H.MxFMHbn.HpFjqQSod7WmJhG1VN0k7Ou', NULL, 'dijkjhkjhkogo@gmail.com', 10, 1542652182, 1542652182),
-(16, 'daniel12345', 'EvXzTSVq7JyCOy3k3O0qxl6UGkSA2Gd_', '$2y$13$ybKOOEDAvzBiY8I.MuUey.Ox.TbAPER/p3f5C6CzITZPXaM1YK6K2', NULL, 'daniel12345@gmail.com', 10, 1542655310, 1542655310),
-(17, 'YIIIIII', '_zJe5uusIfuNFNAbov-yDxlSMOBhvYR1', '$2y$13$6YKmu7fX4mV.SICitteA3e3UVVm5n82g1f2r34tsQvjX4vGCjnqZ2', NULL, 'yiiiiiiiiiiiiii@gmaim.com', 10, 1542729295, 1542729295),
-(18, 'dalpendre', 'wm5GgyJbChEJHBkWTmV9YzeRteZGNu7D', '$2y$13$UDkN6YE4nKma4GRUDp5FQuk51.FxbUQ35f2mD3ahpwe0hV3zedozq', NULL, 'dalpendre1999@gmail.com', 10, 1542729380, 1542729380),
-(19, 'dalpendre1999', '5qgjj95TFXwbzBBdszUetbHMYiQT7wc0', '$2y$13$QRajxJ5UfMVRFvTSQSDmQeQOhVF2dk.k7RrrJ9zVOSX09ZDxCQ8pe', NULL, 'dalpendre19999@gmail.com', 10, 1542730003, 1542730003),
-(20, 'tuamae', 'FyeKo1yeoamiGLzS7iJuP5e_Oa3dlZOo', '$2y$13$hjX1OjnGlBsYYUuySIDRk.6JRIYRYZXNDMA8Y2HrejmbOngBz/8rC', NULL, 'tuamae@tuamae.com', 10, 1542731492, 1542731492),
-(21, 'tuaprima', 'mBAJr0vkrZk_Cea-vi94WOXv4HVEtMw-', '$2y$13$70FZFXucsp4ja4B8Vr/RFuKyG/qETJRWia4mkPTADaZx2JhT9GhoO', NULL, 'tuaprima@tuaprima.com', 10, 1542807257, 1542807257),
 (22, 'teupai', 'tuCZQFyPI0gEAE2Qt833r_iFxe2G5YV-', '$2y$13$.G3Auy10/jGeuoOhwG6HJOfiVgDy0vAV5isb0sl3CtrWtbiPsbaB2', NULL, 'teupai@tudoputa.com', 10, 1542808215, 1542808215),
-(23, 'digooalpendre', 'oKCZQa9_AsxGh2jBDA8HXFFL7odRnrkR', '$2y$13$00Mq.NVsO7cuLNDOMUnQBOKgAKVbiE.YmNJOo3fdf3wU4W/JVtcqK', NULL, 'diogoalpendre@gmail.com', 10, 1542823953, 1542823953);
+(23, 'digooalpendre', 'oKCZQa9_AsxGh2jBDA8HXFFL7odRnrkR', '$2y$13$00Mq.NVsO7cuLNDOMUnQBOKgAKVbiE.YmNJOo3fdf3wU4W/JVtcqK', NULL, 'diogoalpendre@gmail.com', 10, 1542823953, 1542823953),
+(24, 'utilizador', 'N3DI_XRbobnuaJYafNwNr2afERItezHb', '$2y$13$pn3JL7ah2RCPHMBbG6pQaOJxaARFHh2gooAy0Iia1mRgxP0y/zxtG', NULL, 'utilizador1999@gmail.com', 10, 1543251067, 1543251067),
+(25, 'user1234', '3Knz4j7-LsZ-gXhJ2GFbZSjeXzHAd7EZ', '$2y$13$TU.YUASAOLTxIDZ4yMOkYOt7Tt9caeHEBfY6Jd.9/xdSi33ZaPXPm', NULL, 'diedkids@fm.com', 10, 1543259296, 1543259296),
+(26, 'teste1234', 'aMf4PwEIYBeJGOROaHTNx_7cM_VLFSLh', '$2y$13$MkD268AOmV22Y1A4AEeR2.YLD/ucVun1S90sT07PWtw.9IvXPgOkS', NULL, 'sdfidvn@fksdfkf.com', 10, 1543260600, 1543260600),
+(27, 'teste12345', 'x02zlXdyHZTIB1qnL8FdTYwWO8-ncPyg', '$2y$13$3cs.Cxa0.UwdztrZ5VsMLOh751sYG7uHqoLYYaGZ4HzrDGtZt5PO6', NULL, 'mklansldmka@fmklsdfm.com', 10, 1543260627, 1543260627),
+(28, 'testemaisum', 'ueW1kArqKy-cVVKexH9gQD8UE_MilqBB', '$2y$13$1AKHWxf0Ib.JlfWYdnCoCOrtbLtt/dp.cBFK9jqekFWYjBPmVUfdW', NULL, 'lkfsdfmsdof@sdvonfd.com', 10, 1543416115, 1543416115),
+(29, 'dalpendre123456789', 'EtuELMx77VSXwLnXjdp3PD9xGTynmqEE', '$2y$13$LnIXuywauGQyRAiHVrc0fubz4KjI7k9/Pi0.ukE9TSx2AJX6XLn6q', NULL, 'dasdasmda@dksldsa.com', 10, 1543422361, 1543422361),
+(30, 'team1234', 'q35Jm8YnayCc9eO31LVamwaOe9KBKi1e', '$2y$13$0zZ5.xPh6y0gjXojWW0j9elNN9.KFlukzT4SP.sbEE3.Rjl7/zpAm', NULL, 'mldsad@dsds.com', 10, 1543424982, 1543424982),
+(31, 'newteam', 'SYjAHmXw0RzsC0atFNu-fD1um_Wsgudn', '$2y$13$EXTIgGDBmRdRHunbNKMPZ.ClhZjfFGqlG7rDJDA7/VQabzscvjz4K', NULL, 'klndaskd@slkmdld.com', 10, 1543425070, 1543425070),
+(32, 'novaequipa', 'qeGJ06e_DVfsBYVhDyB1KeDNOwBfR6j5', '$2y$13$vALVyHvg8FrHMfxGBEBDKOm9PukD2Tg.Xr8NYAgDP0f.pUnKquxgm', NULL, 'mdasdads@gmail.com', 10, 1543425165, 1543425165),
+(33, 'solouser', 'km-vzqtBb2Xn5pqJdon6o9TvJecYIICJ', '$2y$13$Ft4xFmeyvshbRJYTsIwHcOt3KR2sg898kczwIEAxjuIZv9V5/Ep6u', NULL, 'dnasdsm@kmslda.com', 10, 1543426335, 1543426335),
+(34, 'solouserteste', 'wZ27bcZjWrEtvA7E_gM5gsfzC6dr6Tuq', '$2y$13$RAyf2CPpoJCqQtlk0Yu/9eFoIG1s5WhLEbNEy.C2n9AEfUJDe5d.S', NULL, 'dksldf@dsds.com', 10, 1543427664, 1543427664),
+(35, 'teamuserteste', 'jSWTTXSCna-QWEm_LFvAp4QYXUWO3sjh', '$2y$13$kkVQtEdnbF9ZQhCR9BKSlOjXOqd4K/jUi1rkLfCbqxQfHYD65tD0W', NULL, 'dkasd@das.com', 10, 1543427778, 1543427778),
+(36, 'teamuser', '0tZr0HHtnoaEVTa0MmfS_yqbSicPYakY', '$2y$13$KrVs00NkAB4EKB5jHliiguA6oVNJSL0QxskaVhDHvq8hz4JyqqmGm', NULL, 'sads@fdsc.com', 10, 1543427856, 1543427856),
+(37, 'solouser1234', 'afAg3WzYUy3ZprcvEh5p8ltHbjWgUY35', '$2y$13$H0daGV1UdGYzpPp1SBh80eAWpXFBAXroSth9k3zJYclmwkLzmGuN.', NULL, 'ldksadl@lkasmdl.com', 10, 1543593560, 1543593560),
+(38, 'solouser1999', 'NWArch_D_3KA43j1uli9arGojw5eoXux', '$2y$13$8P0oSUMqEokvEMe8JiGiee05FePcgzt6aYhRQi9r4hW98wOBYj2dK', NULL, 'kfmslfdml@fkdsf.com', 10, 1543608013, 1543608013),
+(39, 'teamuser1999', 'J_-yCe5aXhVGN8YTuZhGLAdLqCbZTN1s', '$2y$13$KXV4T2ZzkHYKq/QdGSFkH.oiKY.yyg3yD55wdL/58XIQrjOpBoCy6', NULL, 'dalpadasd2@dsds.com', 10, 1543608894, 1543608894),
+(40, 'solouser2000', 'sB40Umx4wTRAjBYp1n-gUnWNmJXbZjbJ', '$2y$13$ZysTp1veHVvDSim/usFIE.zjMSUfZeKx1DwqsJhJKXJqXTLdOsW/.', NULL, 'nsadlajkd@fskd.xsds', 10, 1543609065, 1543609065),
+(41, 'solouser12345', 'aeRGSQlsi__A5YmJhnTkGlRo_dRYD8_s', '$2y$13$dvDYOh8uiV8UtnS4M4kFkulFTcZHH79ehXJJ8drZApLH.G/XS5hkO', NULL, 'dfmkljsdf@ksmdskd.com', 10, 1543609433, 1543609433),
+(42, 'daniel123456789', 'c7uy2NdDguiCqtIPQedsBAD_WaXl9W2V', '$2y$13$yTMr4ciC/6QFrQsgvKfw/.NnrVWbEA8VKoo8xSEFxdZMZufwJV4my', NULL, 'pdmapmdkls@dmklsdma.com', 10, 1543842858, 1543842858),
+(43, 'dontstopmenow', '4IhKDiLyjcUkxwsd9PJQ3WZRMu6tR8WP', '$2y$13$T1f.zLGJ6/vU0xaQKqTa6emJUCCGqTaO80kiKjynASxUvNmOJn6q6', NULL, 'dontsecjfdljklcdkjm@kjerhfk.cojri', 10, 1543843198, 1543843198);
 
 -- --------------------------------------------------------
 
@@ -312,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `userprofile` (
   `firstname` varchar(50) NOT NULL,
   `surnames` varchar(50) NOT NULL,
   `birthdate` date NOT NULL,
-  `sex` tinyint(1) NOT NULL,
+  `sex` varchar(1) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `team_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -325,9 +353,8 @@ CREATE TABLE IF NOT EXISTS `userprofile` (
 --
 
 INSERT INTO `userprofile` (`id`, `firstname`, `surnames`, `birthdate`, `sex`, `user_id`, `team_id`) VALUES
-(20, 'tua mae', 'de quarto', '2018-12-23', 1, 20, NULL),
-(21, 'gfvcvvc', 'fdfd', '2018-12-23', 1, 21, NULL),
-(22, 'Diogo', 'Alpendre', '1923-12-23', 1, 22, NULL);
+(42, 'skmasdklm', 'saçsdkalmsdka', '2018-12-11', '0', 42, NULL),
+(43, 'jkjgjhgukgk', 'lhkhohkhukhkh', '2018-12-05', 'M', 43, NULL);
 
 --
 -- Constraints for dumped tables
