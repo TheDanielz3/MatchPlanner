@@ -9,6 +9,7 @@ use yii\helpers\Html;
 $this->title = 'Create Post';
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$idEvent = Yii::$app->request->getQueryParam('EventID');
 ?>
 <div class="post-create">
 

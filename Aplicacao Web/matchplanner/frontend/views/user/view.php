@@ -12,10 +12,9 @@ $mainView = Url::toRoute('site/operations', true);
 echo "<br/>";
 echo "" . Html::a('Go back to main view', $mainView);
 
-
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = $model->id;
+//$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 

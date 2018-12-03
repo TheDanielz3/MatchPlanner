@@ -31,15 +31,14 @@ $id = Yii::$app->user->identity->getId();
             'autoclose' => true,
             'format' => 'yyyy-mm-dd'
         ]
-    ]);?>
+    ]); ?>
 
     <?= $form->field($model, 'sex')->dropDownList(
         ['F' => 'F', 'M' => 'M']
     ); ?>
 
-    <?= $form->field($model, 'user_id')->textInput(['value'=> $id, 'readonly' => true]) ?>
+    <?= $form->field($model, 'user_id')->hiddenInput(['value'=> $id, 'readonly' => true])->label(false) ?>
 
-    <!--TODO: Ver pq está a aprecer inválida-->
     <?= $form->field($model, 'team_id')->hiddenInput()->label(false) ?>
 
     <div class="form-group">

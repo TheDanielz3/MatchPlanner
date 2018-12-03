@@ -67,7 +67,7 @@ class UserprofileController extends Controller
         $model = new Userprofile();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['site/operations', 'id' => $model->id]);
         }
 
         return $this->render('create', [

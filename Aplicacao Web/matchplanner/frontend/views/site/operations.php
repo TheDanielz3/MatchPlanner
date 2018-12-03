@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    USE yii\grid\GridView;
     use yii\helpers\Url;
     use yii\widgets\DetailView;
     use frontend\models\Userprofile;
@@ -42,9 +43,18 @@ use yii\bootstrap\ActiveForm;
     }
 
     echo "" . Html::a('Create event', $criarEvento);
-    echo "<br/><br/>";
+    echo "<br/><br/><br/>";
 
-    $eventos = Event::findOne(['id' => $id]);
+    //Total de eventos
+    $eventos = Event::findAll([
+        'user_id' => $id
+    ]);
 
-    //echo Html::a('Eventos', ['event/index', 'eventos' => $eventos], ['class' => 'btn btn-primary']);
+    echo "Eventos" . "<br/>";
+
+    foreach($eventos as $evento)
+    {
+        $urlEvento = Url::toRoute(['event/view', 'id' => $evento->id]);
+        echo "<br/>" . "Evento " . $evento->event_name . Html::a(" : Clique para aceder", $urlEvento);
+    }
 ?>

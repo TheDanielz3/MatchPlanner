@@ -19,7 +19,7 @@ $id = Yii::$app->user->identity->getId();
 
     <?= $form->field($model, 'team_name')->textInput(['maxlength' => true]) ?>
 
-    //TODO: Alterar as cenas da equipa para a parecer os membros
+    <!--TODO: Alterar as cenas da equipa para a parecer os membros-->
     <?= $form->field($model, 'members')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'user_id')->hiddenInput(['value' => $id])->label(false) ?>

@@ -7,9 +7,14 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Userprofile */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = $model->id;
+//$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
+
+//Link para voltar à main view
+$mainView = Url::toRoute('site/operations', true);
+echo "<br/>";
+echo "" . Html::a('Go back to main view', $mainView);
 ?>
 <div class="userprofile-view">
 

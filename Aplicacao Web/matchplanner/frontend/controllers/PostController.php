@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Event;
 use Yii;
 use frontend\models\Post;
 use frontend\models\PostSearch;
@@ -52,8 +53,12 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'idEvent' => $model->event->id
         ]);
     }
 
@@ -67,7 +72,7 @@ class PostController extends Controller
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/event/view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
