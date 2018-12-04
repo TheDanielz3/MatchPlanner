@@ -7,18 +7,17 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Post */
 /* @var $form yii\widgets\ActiveForm */
-$id = Yii::$app->user->identity->getId();
+$id = Yii::$app->user->identity->getId();   //ID USer
 $dataCreated = date('Y-m-d H:i:s');
 
-//Link para voltar à main view
-$mainView = Url::toRoute('site/operations', true);
-echo "<br/><br/>";
-echo "" . Html::a('Go back to main view', $mainView);
+$idEvent = Yii::$app->request->getQueryParam('event_id');
 
-$idEvent = Yii::$app->request->getQueryParam('EventID');
+echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]));
 ?>
 
 <div class="post-form">
+
+    <br/>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -32,9 +31,9 @@ $idEvent = Yii::$app->request->getQueryParam('EventID');
 
     <?= $form->field($model, 'user_id')->hiddenInput(['value'=> $id, 'readonly' => true])->label(false) ?>
 
-    <?= $form->field($model, 'team_id')->textInput() ?>
+    <?= $form->field($model, 'team_id')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'event_id')->textInput(['value' => $idEvent]) ?>
+    <?= $form->field($model, 'event_id')->hiddenInput(['value' => $idEvent])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
