@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Button;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
-use frontend\models\Post;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Event */
@@ -47,28 +46,14 @@ $this->title = $model->event_name;
     ]) ?>
 
   <?php
+        $eventID = Url::to(['post/create', 'EventID' => $model->id]);
 
-        //ID do evento respetivo aos posts
-        $id = $model->id;
 
-        //Encontra todos os posts do evento
-        $posts = Post::findAll([
-            'event_id' => $id
-        ]);
+        echo "" . Html::a('Create Post', $eventID, ['class'=>'btn btn-primary']);
 
-        foreach($posts as $post)
-        {
-            $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
-            echo "<br/>" . "Title " . $post->title;
-            echo "<br/>" . "Tag" . $post->tag;
-            echo "<br/>";
-        }
 
-        echo "<br/><br/><br/>";
 
-        $createPost = Url::to(['post/create', 'event_id' => $model->id]);
-
-        echo "" . Html::a('Create Post', $createPost, ['class' => 'btn btn-primary']);
   ?>
+
 
 </div>

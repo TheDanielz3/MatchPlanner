@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use frontend\models\Post;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -11,6 +10,7 @@ use yii\widgets\DetailView;
 $idEvent = Yii::$app->request->getQueryParam('EventID');
 var_dump($idEvent);
 die();
+
 
 
 //Link para voltar à main view
@@ -50,4 +50,5 @@ $this->title = $model->title;
             //'event_id',
         ],
     ]) ?>
+
 </div>
