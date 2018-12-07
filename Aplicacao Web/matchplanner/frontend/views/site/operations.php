@@ -8,11 +8,9 @@
     use frontend\models\Teamprofile;
     use frontend\models\Event;
     use frontend\controllers\SiteController;
+    use yii\bootstrap\ActiveForm;
 
-    //Esta vista serve para selecionar o tipo de perfil desejado
-
-
-use yii\bootstrap\ActiveForm;
+    //Esta vista serve para selecionar o tipo de perfil desejado e criar e ver os eventos
 
     $this->title = 'Login';
     $this->params['breadcrumbs'][] = $this->title;
@@ -54,7 +52,10 @@ use yii\bootstrap\ActiveForm;
 
     foreach($eventos as $evento)
     {
+        //Link para cada evento
         $urlEvento = Url::toRoute(['event/view', 'id' => $evento->id]);
-        echo "<br/>" . "Evento " . $evento->event_name . Html::a(" : Clique para aceder", $urlEvento);
+
+        //Imprime hyperlink para aceder
+        echo "<br/>" . "Evento " . $evento->event_name . Html::a(" : Clique para aceder", $urlEvento) . "<br/>";
     }
 ?>

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Button;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
+use frontend\models\Post;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Event */
@@ -46,14 +47,37 @@ $this->title = $model->event_name;
     ]) ?>
 
   <?php
-        $eventID = Url::to(['post/create', 'EventID' => $model->id]);
+
+        //ID do evento respetivo aos posts
+        $id = $model->id;
 
 
-        echo "" . Html::a('Create Post', $eventID, ['class'=>'btn btn-primary']);
+        //Encontra todos os posts do evento
+        $posts = Post::findAll([
+            'event_id' => $id
+        ]);
 
+        foreach($posts as $post)
+        {
+            var_dump($post->id);
 
+                $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
+                echo "<br/>" . "Title " . $post->title;
+                echo "<br/>" . "Tag" . $post->tag;
+                echo Html::a('Update', ['post/update', 'id' => $post->id,'event_id' => $model->id], ['class' => 'btn btn-primary']);
+                echo Html::a('Delete', ['post/delete', 'id' => $post->id,'event_id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ]]);
+        }
 
+        echo "<br/><br/><br/>";
+
+        $createPost = Url::to(['post/create', 'event_id' => $model->id]);
+
+        echo "" . Html::a('Create Post', $createPost, ['class' => 'btn btn-primary']);
   ?>
-
 
 </div>
