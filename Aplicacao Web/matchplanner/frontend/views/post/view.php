@@ -8,13 +8,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Post */
 
-$idEvent = Yii::$app->request->getQueryParam('event_id');
+$idEvent = Yii::$app->request->getQueryParam('EventID');
 var_dump($idEvent);
 die();
 
 
 //Link para voltar à main view
-$eventView = Url::toRoute(['event/view', 'id' => $idEvent]);
+$eventView = Url::toRoute('event/view');
 echo "<br/>";
 echo "" . Html::a('Go back to event', $eventView);
 

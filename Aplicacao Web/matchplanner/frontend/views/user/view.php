@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 //Link para voltar à main view
 $mainView = Url::toRoute('site/operations', true);
 echo "<br/>";
-echo "" . Html::a('Go back to main view', $mainView);
+echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primary']);
 
 //$this->title = $model->id;
 //$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];

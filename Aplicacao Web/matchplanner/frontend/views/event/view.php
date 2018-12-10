@@ -12,7 +12,7 @@ use frontend\models\Post;
 //Link para voltar à main view
 $mainView = Url::toRoute('site/operations', true);
 echo "<br/>";
-echo "" . Html::a('Go back to main view', $mainView);
+echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primary']);
 
 $this->title = $model->event_name;
 //$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
@@ -23,8 +23,8 @@ $this->title = $model->event_name;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Update Event', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete Event', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -51,26 +51,21 @@ $this->title = $model->event_name;
         //ID do evento respetivo aos posts
         $id = $model->id;
 
-
         //Encontra todos os posts do evento
         $posts = Post::findAll([
             'event_id' => $id
         ]);
 
+        //Mostra os posts do evento
         foreach($posts as $post)
         {
-            var_dump($post->id);
-
-                $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
-                echo "<br/>" . "Title " . $post->title;
-                echo "<br/>" . "Tag" . $post->tag;
-                echo Html::a('Update', ['post/update', 'id' => $post->id,'event_id' => $model->id], ['class' => 'btn btn-primary']);
-                echo Html::a('Delete', ['post/delete', 'id' => $post->id,'event_id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
-                        'method' => 'post',
-                    ]]);
+            $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
+            echo "<br/>" . "Title --> " . $post->title;
+            echo "<br/>" . "Content --> " . $post->content;
+            echo "<br/>" . "Tag --> " . $post->tag;
+            echo "<br/><br/>" . Html::a('Update Post', ['post/update', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-primary']);
+            echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-danger']);
+            echo "<br/><br/>";
         }
 
         echo "<br/><br/><br/>";

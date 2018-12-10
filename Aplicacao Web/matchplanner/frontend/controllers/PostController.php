@@ -70,8 +70,7 @@ class PostController extends Controller
     {
         $model = new Post();
 
-        $idEvent = Yii::$app->request->get('event_id');
-
+        $idEvent = Yii::$app->request->getQueryParam('event_id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/event/view', 'id' => $idEvent]);
@@ -92,7 +91,6 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         $idEvent = Yii::$app->request->get('event_id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -101,7 +99,6 @@ class PostController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'id_event' => $idEvent,
         ]);
     }
 

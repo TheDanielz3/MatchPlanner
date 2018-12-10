@@ -1,7 +1,8 @@
 <?php
 
     use yii\helpers\Html;
-    USE yii\grid\GridView;
+    use yii\grid\GridView;
+    use tecnocen\hoverdropdown\HoverDropdownAssetBundle;
     use yii\helpers\Url;
     use yii\widgets\DetailView;
     use frontend\models\Userprofile;
@@ -12,8 +13,8 @@
 
     //Esta vista serve para selecionar o tipo de perfil desejado e criar e ver os eventos
 
-    $this->title = 'Login';
-    $this->params['breadcrumbs'][] = $this->title;
+    //$this->title = 'Login';
+    //$this->params['breadcrumbs'][] = $this->title;
     $id = Yii::$app->user->identity->getId();
 
     $perfil = Url::to(['user/view', 'id' => $id]);
@@ -22,7 +23,7 @@
     $criarEvento = Url::toRoute('event/create', true);
 
     echo "<br/>";
-    echo "" . Html::a('See profile', $perfil);
+    echo "" . Html::a('See profile', $perfil, ['class' => 'btn btn-primary']);
     echo "<br/><br/>";
 
     $user = Userprofile::findOne($id);
@@ -30,17 +31,17 @@
 
     if($user != null)
     {
-        echo "" . Html::a('See solo profile', $perfilSolo);
+        echo "" . Html::a('See solo profile', $perfilSolo, ['class' => 'btn btn-primary']);
         echo "<br/><br/>";
     }
 
     if($team != null)
     {
-        echo "" . Html::a('See team profile', $perfilTeam);
+        echo "" . Html::a('See team profile', $perfilTeam, ['class' => 'btn btn-primary']);
         echo "<br/><br/>";
     }
 
-    echo "" . Html::a('Create event', $criarEvento);
+    echo "" . Html::a('Create event', $criarEvento,['class' => 'btn btn-primary']);
     echo "<br/><br/><br/>";
 
     //Total de eventos
@@ -56,6 +57,8 @@
         $urlEvento = Url::toRoute(['event/view', 'id' => $evento->id]);
 
         //Imprime hyperlink para aceder
-        echo "<br/>" . "Evento " . $evento->event_name . Html::a(" : Clique para aceder", $urlEvento) . "<br/>";
+        echo "<br/>" . Html::a($evento->event_name, $urlEvento, ['class' => 'btn btn-primary']) . "<br/>";
+
+        //HoverDropdownAssetBundle::register();
     }
 ?>

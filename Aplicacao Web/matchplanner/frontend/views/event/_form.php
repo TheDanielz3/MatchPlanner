@@ -11,6 +11,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
 use dosamigos\datetimepicker\DateTimePicker;
@@ -31,7 +32,7 @@ $id = Yii::$app->user->identity->getId();
     <?= $form->field($model, 'begin_date')->widget(DateTimePicker::className(), [
         'language' => 'pt',
         'size' => 'ms',
-        'template' => '{input}',
+        //'template' => '{input}',
         'pickButtonIcon' => 'glyphicon glyphicon-time',
         'inline' => true,
         'clientOptions' => [

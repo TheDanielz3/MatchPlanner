@@ -24,9 +24,9 @@ $id = Yii::$app->user->identity->getId();
     <?= $form->field($model, 'birthdate')->widget(
         DatePicker::className(), [
         // inline too, not bad
-        'inline' => true,
+        'inline' => false,
         // modify template for custom rendering
-        'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
         'clientOptions' => [
             'autoclose' => true,
             'format' => 'yyyy-mm-dd'

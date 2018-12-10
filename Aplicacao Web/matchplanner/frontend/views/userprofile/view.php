@@ -14,7 +14,7 @@ use yii\widgets\DetailView;
 //Link para voltar à main view
 $mainView = Url::toRoute('site/operations', true);
 echo "<br/>";
-echo "" . Html::a('Go back to main view', $mainView);
+echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primary']);
 ?>
 <div class="userprofile-view">
 

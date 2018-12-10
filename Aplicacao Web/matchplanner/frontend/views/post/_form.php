@@ -7,13 +7,12 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Post */
 /* @var $form yii\widgets\ActiveForm */
-$id = Yii::$app->user->identity->getId();   //ID USer
+$id = Yii::$app->user->identity->getId();   //ID User
 $dataCreated = date('Y-m-d H:i:s');
-
 
 $idEvent = Yii::$app->request->getQueryParam('event_id');
 
-echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]));
+//echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]));
 ?>
 
 <div class="post-form">
@@ -34,7 +33,7 @@ echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEve
 
     <?= $form->field($model, 'team_id')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'event_id')->textInput(['value' => $idEvent]) ?>
+    <?= $form->field($model, 'event_id')->hiddenInput(['value' => $idEvent])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

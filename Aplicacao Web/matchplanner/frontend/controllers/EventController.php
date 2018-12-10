@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Post;
 use Yii;
 use frontend\models\Event;
 use frontend\models\EventSearch;
@@ -92,6 +93,7 @@ class EventController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'id' =>$model->id,
         ]);
     }
 
@@ -106,7 +108,7 @@ class EventController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/site/operations', 'id' => $id]);
     }
 
     /**
