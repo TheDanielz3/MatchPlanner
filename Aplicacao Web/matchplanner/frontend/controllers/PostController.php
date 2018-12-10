@@ -72,7 +72,8 @@ class PostController extends Controller
 
         $idEvent = Yii::$app->request->getQueryParam('event_id');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
             return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 

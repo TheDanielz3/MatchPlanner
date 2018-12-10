@@ -19,7 +19,6 @@ use dosamigos\datetimepicker\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Event */
 /* @var $form yii\widgets\ActiveForm */
-
 $id = Yii::$app->user->identity->getId();
 ?>
 
@@ -66,9 +65,9 @@ $id = Yii::$app->user->identity->getId();
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'user_id')->hiddenInput(['value' => $id, 'readonly'=> true])->label(false) ?>
+    <?= $form->field($model, 'user_id')->textInput(['value' => $id, 'readonly'=> true])->label() ?>
 
-    <?= $form->field($model, 'team_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'team_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

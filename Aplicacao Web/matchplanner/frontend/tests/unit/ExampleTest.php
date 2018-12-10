@@ -18,12 +18,12 @@ class ExampleTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testSomeFeature()
+    public function testSumOperation()
     {
-        /*$calculadora = new Calculadora();
+        $calculadora = new Calculadora();
 
         $soma = $calculadora->soma(2, 1);
 
-        $this->assertEquals(3, $soma);*/
+        $this->assertEquals(3, $soma);
     }
 }

@@ -66,8 +66,11 @@ class CommentController extends Controller
     {
         $model = new Comment();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $idEvent = Yii::$app->request->getQueryParam('event_id');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 
         return $this->render('create', [
@@ -85,9 +88,10 @@ class CommentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $idEvent = Yii::$app->request->get('event_id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 
         return $this->render('update', [

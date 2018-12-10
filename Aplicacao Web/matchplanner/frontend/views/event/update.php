@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 $idEvent = Yii::$app->request->get('id');
 
-echo "" . Html::a('Go back to event', Url::toRoute(['/event/view', 'id' => $idEvent]));
+echo "" . Html::a('Go back to event', Url::toRoute(['/event/view', 'id' => $idEvent]),['class' => 'btn btn-primary']);
 
 $this->title = 'Update Event';
 //$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];

@@ -22,7 +22,7 @@ $id = Yii::$app->user->identity->getId();
     <!--TODO: Alterar as cenas da equipa para a parecer os membros-->
     <?= $form->field($model, 'members')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'user_id')->hiddenInput(['value' => $id])->label(false) ?>
+    <?= $form->field($model, 'user_id')->textInput(['value' => $id])->label() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $model frontend\models\Post */
 
 $idEvent = Yii::$app->request->getQueryParam('event_id');
-echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]));
+echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]), ['class' => 'btn btn-primary']);
 
 $this->title = 'Update Post: ' . $model->title;
 //$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];

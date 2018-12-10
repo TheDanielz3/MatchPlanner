@@ -1,14 +1,19 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Userprofile */
 
-$this->title = 'Update Userprofile: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$id = Yii::$app->user->identity->getId();
+
+echo "" . Html::a('Go back to profile', Url::toRoute(['/userprofile/view', 'id' => $id]), ['class' => 'btn btn-primary']);
+
+$this->title = 'Update Solo Profile';
+//$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+//$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="userprofile-update">
 

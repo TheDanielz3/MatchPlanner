@@ -9,8 +9,8 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\Post */
 
 $idEvent = Yii::$app->request->getQueryParam('EventID');
-var_dump($idEvent);
-die();
+//var_dump($idEvent);
+//die();
 
 
 //Link para voltar à main view
