@@ -12,8 +12,8 @@ echo "<br/>";
 echo "" . Html::a('Go back', $profileView, ['class' => 'btn btn-primary']);
 
 $this->title = 'Create Solo Profile';
-//$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userprofile-create">
 

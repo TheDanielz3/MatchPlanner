@@ -61,35 +61,32 @@ $this->title = $model->event_name;
         foreach($posts as $post)
         {
             $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
-            echo "<br/><br/><br/>" . "Title --> " . $post->title;
+            echo "<br/>" . "Title --> " . $post->title;
             echo "<br/>" . "Content --> " . $post->content;
             echo "<br/>" . "Tag --> " . $post->tag . "<br/>";
-            echo "<br/><br/>" . Html::a('Update Post', ['post/update', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-primary']);
-            echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-danger']);
-            echo "<br/><br/>";
 
-            echo "<br/>" . Html::a('Create Comment', ['comment/create', 'event_id'  => $model->id, 'post_id' => $post->id], ['class' => 'btn btn-primary']) . "<br/>";
-
-            //Comentários
             $comments = Comment::findAll([
-                'post_id' => $post->id
+               'post_id' => $post->id
             ]);
 
             foreach($comments as $comment)
             {
                 $urlComment = Url::toRoute(['event/view', 'id' => $post->id]);
-                echo "<br/><pre style='background-color: white'>" . $comment->content . "</pre>";
-                echo "<pre style='background-color: #3399ff'>" . $comment->tag . "</pre>";
-                echo Html::a('Delete Comment', ['comment/delete', 'event_id'  => $model->id, 'post_id' => $post->id, 'id' => $comment->id], ['class' => 'btn btn-danger pull-right'])
-                . Html::a('Update Comment', ['comment/update', 'event_id'  => $model->id, 'post_id' => $post->id, 'id' => $comment->id], ['class' => 'btn btn-primary pull-right']) . "<br/><br/>";
+                echo "<br/><pre>" . "pre Content --> " . $comment->content . "</pre>";
+                echo "<pre>" . "pre Tag --> " . $comment->tag . "</pre>";
             }
+
+            echo "<br/><br/>" . Html::a('Create Comment', ['comment/create', 'event_id'  => $model->id, 'post_id' => $post->id], ['class' => 'btn btn-primary']);
+            echo "<br/><br/>" . Html::a('Update Post', ['post/update', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-primary']);
+            echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-danger']);
+            echo "<br/><br/>";
         }
 
-        //echo "<br/><br/><br/><br/>";
+        echo "<br/><br/><br/>";
 
         $createPost = Url::to(['post/create', 'event_id' => $model->id]);
 
-        echo "<br/><br/><br><br>" . Html::a('Create New Post', $createPost, ['class' => 'btn btn-primary']);
+        echo "" . Html::a('Create Post', $createPost, ['class' => 'btn btn-primary']);
   ?>
 
 </div>

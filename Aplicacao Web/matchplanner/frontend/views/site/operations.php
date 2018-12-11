@@ -23,25 +23,27 @@
     $criarEvento = Url::toRoute('event/create', true);
 
     echo "<br/>";
-    echo "" . Html::a('See Profile', $perfil, ['class' => 'btn btn-primary']);
+    echo "" . Html::a('See profile', $perfil, ['class' => 'btn btn-primary']);
     echo "<br/><br/>";
 
     $user = Userprofile::findOne($id);
+    //var_dump($user);
     $team = Teamprofile::findOne($id);
+    //var_dump($team);
 
     if($user != null)
     {
-        echo "" . Html::a('See Solo Profile', $perfilSolo, ['class' => 'btn btn-primary']);
+        echo "" . Html::a('See solo profile', $perfilSolo, ['class' => 'btn btn-primary']);
         echo "<br/><br/>";
     }
 
     if($team != null)
     {
-        echo "" . Html::a('See Team Profile', $perfilTeam, ['class' => 'btn btn-primary']);
+        echo "" . Html::a('See team profile', $perfilTeam, ['class' => 'btn btn-primary']);
         echo "<br/><br/>";
     }
 
-    echo "" . Html::a('Create Event', $criarEvento,['class' => 'btn btn-primary']);
+    echo "" . Html::a('Create event', $criarEvento,['class' => 'btn btn-primary']);
     echo "<br/><br/><br/>";
 
     //Total de eventos
@@ -58,5 +60,7 @@
 
         //Imprime hyperlink para aceder
         echo "<br/>" . Html::a($evento->event_name, $urlEvento, ['class' => 'btn btn-primary']) . "<br/>";
+
+        //HoverDropdownAssetBundle::register();
     }
 ?>

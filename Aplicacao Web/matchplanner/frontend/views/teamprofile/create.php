@@ -12,8 +12,8 @@ echo "" . Html::a('Go back', $profileView, ['class' => 'btn btn-primary']);
 /* @var $model frontend\models\Teamprofile */
 
 $this->title = 'Create Team Profile';
-//$this->params['breadcrumbs'][] = ['label' => 'Teamprofiles', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Teamprofiles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="teamprofile-create">
 

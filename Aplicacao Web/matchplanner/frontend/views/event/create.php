@@ -13,6 +13,7 @@ echo "<br/>";
 echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primary']);
 
 $this->title = 'Create Event';
+
 //$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>

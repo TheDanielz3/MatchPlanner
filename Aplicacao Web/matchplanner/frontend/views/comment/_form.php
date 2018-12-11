@@ -18,7 +18,7 @@ $dataCreated = date('Y-m-d H:i:s');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => '2']) ?>
+    <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tag')->textInput(['maxlength' => true]) ?>
 

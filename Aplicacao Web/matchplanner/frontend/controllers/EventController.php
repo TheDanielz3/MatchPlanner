@@ -2,10 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Teamprofile;
 use frontend\models\User;
 use frontend\models\Userprofile;
-use frontend\models\Teamprofile;
-use frontend\models\Post;
 use Yii;
 use frontend\models\Event;
 use frontend\models\EventSearch;
@@ -68,13 +67,16 @@ class EventController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Event();
 
         $id = Yii::$app->user->identity->getId();
 
-        $Team = Teamprofile::findOne($id);
 
-        $Solo = Userprofile::findOne($id);
+        //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
+        $Team = Teamprofile::findAll($id);
+
+        $Solo = Userprofile::findAll($id);
 
         //Selecao de solo é igual 1
         if($Solo != null)
@@ -82,20 +84,22 @@ class EventController extends Controller
             $id_Respetivo_a_Passar = $Solo;
             $selecao = 1;
             //var_dump($id_Respetivo_a_Passar);
-        }
 
+        }
         //Selecao de Team é igual a 2
         if($Team != null)
         {
             $id_Respetivo_a_Passar = $Team;
             $selecao = 2;
             //var_dump($id_Respetivo_a_Passar);
+
         }
 
-        if($model->load(Yii::$app->request->post()) && $model->save())
-        {
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
 
         return $this->render('create',[
             'model' => $model,
@@ -122,7 +126,6 @@ class EventController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'id' =>$model->id,
         ]);
     }
 
@@ -137,7 +140,7 @@ class EventController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['/site/operations', 'id' => $id]);
+        return $this->redirect(['index']);
     }
 
     /**

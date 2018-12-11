@@ -10,7 +10,8 @@ use yii\widgets\ActiveForm;
 $id = Yii::$app->user->identity->getId();   //ID User
 $dataCreated = date('Y-m-d H:i:s');
 
-$idEvent = Yii::$app->request->getQueryParam('event_id');
+
+$idEvent = Yii::$app->request->get('event_id');
 
 //echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]));
 ?>

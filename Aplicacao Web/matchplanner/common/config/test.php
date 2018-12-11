@@ -1,7 +1,7 @@
 <?php
 return [
     'id' => 'app-common-tests',
-    'basePath' => dirname(_DIR_),
+    'basePath' => dirname(__DIR__),
     'components' => [
         'user' => [
             'class' => 'yii\web\User',

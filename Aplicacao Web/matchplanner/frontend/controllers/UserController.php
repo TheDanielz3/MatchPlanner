@@ -103,6 +103,7 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    //TODO: Apagar User
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
