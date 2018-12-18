@@ -49,6 +49,11 @@ $this->title = $model->event_name;
 
   <?php
 
+
+      $createPost = Url::to(['post/create', 'event_id' => $model->id]);
+
+      echo "" . Html::a('Create Post', $createPost, ['class' => 'btn btn-primary']);
+
         //ID do evento respetivo aos posts
         $id = $model->id;
 
@@ -58,35 +63,48 @@ $this->title = $model->event_name;
         ]);
 
         //Mostra os posts do evento
-        foreach($posts as $post)
-        {
-            $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
-            echo "<br/>" . "Title --> " . $post->title;
-            echo "<br/>" . "Content --> " . $post->content;
-            echo "<br/>" . "Tag --> " . $post->tag . "<br/>";
+          //Mostra os posts do evento
+      foreach($posts as $post)
+      {
+          $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
+          echo "<br/><br/><br/>" . "Title --> " . $post->title;
+          echo "<br/>" . "Content --> " . $post->content;
+          echo "<br/>" . "Tag --> " . $post->tag . "<br/>";
+          echo "<br/><br/>" . Html::a('Update Post', ['post/update', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-primary']);
+          //echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-danger']);
+          echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], [
+              'class' => 'btn btn-danger',
+              'data' => [
+                  'confirm' => 'Are you sure you want to delete this post?',
+                  'method' => 'post',
+              ],
+          ]);
+          echo "<br/><br/>";
 
-            $comments = Comment::findAll([
-               'post_id' => $post->id
-            ]);
+          echo "<br/>" . Html::a('Create Comment', ['comment/create', 'event_id'  => $model->id, 'post_id' => $post->id], ['class' => 'btn btn-primary']) . "<br/>";
 
-            foreach($comments as $comment)
-            {
-                $urlComment = Url::toRoute(['event/view', 'id' => $post->id]);
-                echo "<br/><pre>" . "pre Content --> " . $comment->content . "</pre>";
-                echo "<pre>" . "pre Tag --> " . $comment->tag . "</pre>";
-            }
+          //Comentários
+          $comments = Comment::findAll([
+              'post_id' => $post->id
+          ]);
 
-            echo "<br/><br/>" . Html::a('Create Comment', ['comment/create', 'event_id'  => $model->id, 'post_id' => $post->id], ['class' => 'btn btn-primary']);
-            echo "<br/><br/>" . Html::a('Update Post', ['post/update', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-primary']);
-            echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-danger']);
-            echo "<br/><br/>";
-        }
+          foreach($comments as $comment)
+          {
+              $urlComment = Url::toRoute(['event/view', 'id' => $post->id]);
+              echo "<br/><pre style='background-color: white'>" . $comment->content . "</pre>";
+              echo "<pre style='background-color: #3399ff'>" . $comment->tag . "</pre>";
+              echo Html::a('Delete Comment', ['comment/delete', 'event_id' => $model->id, 'post_id' => $post->id, 'id' => $comment->id], [
+                  'class' => 'btn btn-danger pull-right',
+                  'data' => [
+                      'confirm' => 'Are you sure you want to delete this item?',
+                      'method' => 'post',
+                  ],
+              ]);
+              echo Html::a('Update Comment', ['comment/update', 'event_id'  => $model->id, 'post_id' => $post->id, 'id' => $comment->id], ['class' => 'btn btn-primary pull-right']) . "<br/><br/>";
+          }
+      }
 
         echo "<br/><br/><br/>";
-
-        $createPost = Url::to(['post/create', 'event_id' => $model->id]);
-
-        echo "" . Html::a('Create Post', $createPost, ['class' => 'btn btn-primary']);
   ?>
 
 </div>

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Faker\Provider\DateTime;
 use Yii;
 use frontend\models\Userprofile;
 use frontend\models\UserprofileSearch;
@@ -66,8 +67,9 @@ class UserprofileController extends Controller
     {
         $model = new Userprofile();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['site/operations', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+                return $this->redirect(['site/operations', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -106,7 +108,7 @@ class UserprofileController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['site/login']);
     }
 
     /**

@@ -67,11 +67,9 @@ class EventController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new Event();
 
         $id = Yii::$app->user->identity->getId();
-
 
         //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
         $Team = Teamprofile::findAll($id);
@@ -95,11 +93,9 @@ class EventController extends Controller
 
         }
 
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
 
         return $this->render('create',[
             'model' => $model,
@@ -120,12 +116,38 @@ class EventController extends Controller
     {
         $model = $this->findModel($id);
 
+        $id = Yii::$app->user->identity->getId();
+
+        //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
+        $Team = Teamprofile::findAll($id);
+
+        $Solo = Userprofile::findAll($id);
+
+        //Selecao de solo é igual 1
+        if($Solo != null)
+        {
+            $id_Respetivo_a_Passar = $Solo;
+            $selecao = 1;
+            //var_dump($id_Respetivo_a_Passar);
+
+        }
+        //Selecao de Team é igual a 2
+        if($Team != null)
+        {
+            $id_Respetivo_a_Passar = $Team;
+            $selecao = 2;
+            //var_dump($id_Respetivo_a_Passar);
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'ID_a_passar' => $id_Respetivo_a_Passar,
+            $this->view->params['selecao'] = $selecao,
+            $this->view->params['id_Respetivo_a_Passar'] = $id_Respetivo_a_Passar,
         ]);
     }
 
@@ -138,9 +160,22 @@ class EventController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);     //Model de eventos
+        $idEvent = Yii::$app->request->get('event_id');
+
+        foreach($model->comments as $comment)
+        {
+            $comment->delete();
+        }
+
+        foreach($model->posts as $post)
+        {
+            $post->delete();
+        }
+
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/site/operations', 'id' => $id]);
     }
 
     /**

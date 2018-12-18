@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => "MatchPlanner",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -38,7 +38,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'MatchPlanner', 'url' => ['/site/match']],
         ['label' => 'Página de escolha', 'url' => ['/site/operations']],
-        ['label' => 'Home', 'url' => ['/site/index']],
+        //['label' => 'Home', 'url' => ['/site/index']],
         //['label' => 'About', 'url' => ['/site/about']],
         //['label' => 'Contact', 'url' => ['/site/contact']],
     ];

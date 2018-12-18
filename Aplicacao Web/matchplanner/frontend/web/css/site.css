@@ -1,6 +1,8 @@
 html,
 body {
     height: 100%;
+    //background-image: url("background_matchplanner.jpg");
+    background-position: center;
 }
 
 .wrap {

@@ -3,6 +3,11 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\User;
+use frontend\models\Userprofile;
+use frontend\models\Teamprofile;
+use frontend\models\Event;
+use frontend\models\Post;
 use frontend\models\Comment;
 use frontend\models\CommentSearch;
 use yii\web\Controller;
@@ -66,12 +71,40 @@ class CommentController extends Controller
     {
         $model = new Comment();
 
+        $id = Yii::$app->user->identity->getId();
+        $idEvent = Yii::$app->request->getQueryParam('event_id');
+
+        //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
+        $Team = Teamprofile::findAll($id);
+
+        $Solo = Userprofile::findAll($id);
+
+        //Selecao de solo é igual 1
+        if($Solo != null)
+        {
+            $id_Respetivo_a_Passar = $Solo;
+            $selecao = 1;
+            //var_dump($id_Respetivo_a_Passar);
+
+        }
+        //Selecao de Team é igual a 2
+        if($Team != null)
+        {
+            $id_Respetivo_a_Passar = $Team;
+            $selecao = 2;
+            //var_dump($id_Respetivo_a_Passar);
+
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['event/view', 'id' => $idEvent]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'ID_a_passar' => $id_Respetivo_a_Passar,
+            $this->view->params['selecao'] = $selecao,
+            $this->view->params['id_Respetivo_a_Passar'] = $id_Respetivo_a_Passar,
         ]);
     }
 
@@ -85,13 +118,40 @@ class CommentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $id = Yii::$app->user->identity->getId();
+        $idEvent = Yii::$app->request->get('event_id');
+
+        //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
+        $Team = Teamprofile::findAll($id);
+
+        $Solo = Userprofile::findAll($id);
+
+        //Selecao de solo é igual 1
+        if($Solo != null)
+        {
+            $id_Respetivo_a_Passar = $Solo;
+            $selecao = 1;
+            //var_dump($id_Respetivo_a_Passar);
+
+        }
+        //Selecao de Team é igual a 2
+        if($Team != null)
+        {
+            $id_Respetivo_a_Passar = $Team;
+            $selecao = 2;
+            //var_dump($id_Respetivo_a_Passar);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'id_event' => $idEvent,
+            'ID_a_passar' => $id_Respetivo_a_Passar,
+            $this->view->params['selecao'] = $selecao,
+            $this->view->params['id_Respetivo_a_Passar'] = $id_Respetivo_a_Passar,
         ]);
     }
 
@@ -106,7 +166,9 @@ class CommentController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        $idEvent = Yii::$app->request->get('event_id');
+
+        return $this->redirect(['event/view', 'id' => $idEvent]);
     }
 
     /**

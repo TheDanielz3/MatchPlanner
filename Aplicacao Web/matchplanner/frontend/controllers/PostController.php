@@ -3,6 +3,10 @@
 namespace frontend\controllers;
 
 use frontend\models\Event;
+use frontend\models\Comment;
+use frontend\models\Teamprofile;
+use frontend\models\User;
+use frontend\models\Userprofile;
 use Yii;
 use frontend\models\Post;
 use frontend\models\PostSearch;
@@ -70,8 +74,29 @@ class PostController extends Controller
     {
         $model = new Post();
 
+        $id = Yii::$app->user->identity->getId();
         $idEvent = Yii::$app->request->get('event_id');
 
+        //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
+        $Team = Teamprofile::findAll($id);
+
+        $Solo = Userprofile::findAll($id);
+
+        //Selecao de solo é igual 1
+        if($Solo != null)
+        {
+            $id_Respetivo_a_Passar = $Solo;
+            $selecao = 1;
+            //var_dump($id_Respetivo_a_Passar);
+
+        }
+        //Selecao de Team é igual a 2
+        if($Team != null)
+        {
+            $id_Respetivo_a_Passar = $Team;
+            $selecao = 2;
+            //var_dump($id_Respetivo_a_Passar);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/event/view', 'id' => $idEvent]);
@@ -79,6 +104,9 @@ class PostController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'ID_a_passar' => $id_Respetivo_a_Passar,
+            $this->view->params['selecao'] = $selecao,
+            $this->view->params['id_Respetivo_a_Passar'] = $id_Respetivo_a_Passar,
         ]);
     }
 
@@ -93,7 +121,29 @@ class PostController extends Controller
     {
         $model = $this->findModel($id);
 
+        $id = Yii::$app->user->identity->getId();
         $idEvent = Yii::$app->request->get('event_id');
+
+        //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
+        $Team = Teamprofile::findAll($id);
+
+        $Solo = Userprofile::findAll($id);
+
+        //Selecao de solo é igual 1
+        if($Solo != null)
+        {
+            $id_Respetivo_a_Passar = $Solo;
+            $selecao = 1;
+            //var_dump($id_Respetivo_a_Passar);
+
+        }
+        //Selecao de Team é igual a 2
+        if($Team != null)
+        {
+            $id_Respetivo_a_Passar = $Team;
+            $selecao = 2;
+            //var_dump($id_Respetivo_a_Passar);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/event/view', 'id' => $idEvent]);
@@ -102,6 +152,9 @@ class PostController extends Controller
         return $this->render('update', [
             'model' => $model,
             'id_event' => $idEvent,
+            'ID_a_passar' => $id_Respetivo_a_Passar,
+            $this->view->params['selecao'] = $selecao,
+            $this->view->params['id_Respetivo_a_Passar'] = $id_Respetivo_a_Passar,
         ]);
     }
 
@@ -114,9 +167,19 @@ class PostController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id); //Model de posts
+        $idEvent = Yii::$app->request->get('event_id');
+
+        foreach($model->comments as $comment)
+        {
+            $comment->delete();
+        }
+
+        //Apaga o post
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        //Redireciona para o evento respetivo onde estava
+        return $this->redirect(['event/view', 'id' => $idEvent]);
     }
 
     /**

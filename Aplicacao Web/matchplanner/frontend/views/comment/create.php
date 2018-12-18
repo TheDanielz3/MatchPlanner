@@ -6,9 +6,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Comment */
 
-$mainView = Url::toRoute('site/operations', true);
-echo "<br/>";
-echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primary']);
+$idEvent = Yii::$app->request->getQueryParam('event_id');
+echo "" . Html::a('Go back to event', Url::toRoute(['event/view', 'id' => $idEvent]), ['class' => 'btn btn-primary']);
 
 $this->title = 'Create a Comment';
 //$this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
