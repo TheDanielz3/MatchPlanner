@@ -32,8 +32,7 @@ if($selecao == 2)
 
 <div class="post-form">
 
-
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -42,6 +41,8 @@ if($selecao == 2)
     <?= $form->field($model, 'tag')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'create_time')->hiddenInput(['value' => $dataCreated])->label(false) ?>
+
+    <?= $form->field($model, 'image')->fileInput() ?>
 
     <?= $form->field($model, 'user_id')->hiddenInput(['value'=> $userid, 'readonly' => true])->label(false) ?>
 

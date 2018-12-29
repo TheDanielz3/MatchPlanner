@@ -16,6 +16,7 @@
     //$this->title = 'Login';
     //$this->params['breadcrumbs'][] = $this->title;
     $id = Yii::$app->user->identity->getId();
+    //$idTeam = Yii::$app->user->identity->getId();
 
     $perfil = Url::to(['user/view', 'id' => $id]);
     $perfilSolo = Url::to(['userprofile/view', 'id' => $id]);
@@ -51,9 +52,27 @@
         'user_id' => $id
     ]);
 
+    //Total de eventos de team profiles
+    $eventosT = Event::findAll([
+        'team_id' => $id
+    ]);
+
     echo "Eventos" . "<br/>";
 
+    //Eventos de perfis solo
     foreach($eventos as $evento)
+    {
+        //Link para cada evento
+        $urlEvento = Url::toRoute(['event/view', 'id' => $evento->id]);
+
+        //Imprime hyperlink para aceder
+        echo "<br/>" . Html::a($evento->event_name, $urlEvento, ['class' => 'btn btn-primary']) . "<br/>";
+
+        //HoverDropdownAssetBundle::register();
+    }
+
+    //Eventos de perfis teams
+    foreach($eventosT as $evento)
     {
         //Link para cada evento
         $urlEvento = Url::toRoute(['event/view', 'id' => $evento->id]);

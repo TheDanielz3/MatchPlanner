@@ -28,7 +28,7 @@ $this->title = $model->event_name;
         <?= Html::a('Delete Event', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Are you sure you want to delete this event?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -96,7 +96,7 @@ $this->title = $model->event_name;
               echo Html::a('Delete Comment', ['comment/delete', 'event_id' => $model->id, 'post_id' => $post->id, 'id' => $comment->id], [
                   'class' => 'btn btn-danger pull-right',
                   'data' => [
-                      'confirm' => 'Are you sure you want to delete this item?',
+                      'confirm' => 'Are you sure you want to delete this comment?',
                       'method' => 'post',
                   ],
               ]);

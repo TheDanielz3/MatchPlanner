@@ -12,6 +12,7 @@ use Yii;
  * @property string $content
  * @property string $tag
  * @property string $create_time
+ * @property string $image
  * @property int $user_id
  * @property int $team_id
  * @property int $event_id
@@ -42,6 +43,7 @@ class Post extends \yii\db\ActiveRecord
             [['user_id', 'team_id', 'event_id'], 'integer'],
             [['title', 'tag'], 'string', 'max' => 70],
             [['content'], 'string', 'max' => 1000],
+            [['image'], 'string', 'max' => 200],
             [['event_id'], 'exist', 'skipOnError' => true, 'targetClass' => Event::className(), 'targetAttribute' => ['event_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teamprofile::className(), 'targetAttribute' => ['team_id' => 'id']],
@@ -59,6 +61,7 @@ class Post extends \yii\db\ActiveRecord
             'content' => 'Content',
             'tag' => 'Tag',
             'create_time' => 'Create Time',
+            'image' => 'Image',
             'user_id' => 'User ID',
             'team_id' => 'Team ID',
             'event_id' => 'Event ID',

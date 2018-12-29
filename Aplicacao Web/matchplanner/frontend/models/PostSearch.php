@@ -2,7 +2,6 @@
 
 namespace frontend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Post;
@@ -19,7 +18,7 @@ class PostSearch extends Post
     {
         return [
             [['id', 'user_id', 'team_id', 'event_id'], 'integer'],
-            [['title', 'content', 'tag', 'create_time'], 'safe'],
+            [['title', 'content', 'tag', 'create_time', 'image'], 'safe'],
         ];
     }
 
@@ -68,7 +67,8 @@ class PostSearch extends Post
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'tag', $this->tag]);
+            ->andFilterWhere(['like', 'tag', $this->tag])
+            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }

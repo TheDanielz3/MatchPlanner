@@ -20,6 +20,7 @@ use Yii;
  */
 class Userprofile extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
     /**
      * {@inheritdoc}
      */
@@ -43,6 +44,14 @@ class Userprofile extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teamprofile::className(), 'targetAttribute' => ['team_id' => 'id']],
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['firstname','surnames','birthdate','sex'];
+
+        return $scenarios;
     }
 
     /**

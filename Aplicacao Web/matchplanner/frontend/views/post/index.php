@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'content',
             'tag',
             'create_time',
+            //'image',
             //'user_id',
             //'team_id',
             //'event_id',

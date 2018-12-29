@@ -1,26 +1,15 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-use frontend\models\Post;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Post */
 
-$idEvent = Yii::$app->request->getQueryParam('EventID');
-//var_dump($idEvent);
-//die();
-
-
-//Link para voltar à main view
-$eventView = Url::toRoute('event/view');
-echo "<br/>";
-echo "" . Html::a('Go back to event', $eventView);
-
 $this->title = $model->title;
-//$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+\yii\web\YiiAsset::register($this);
 ?>
 <div class="post-view">
 
@@ -40,14 +29,16 @@ $this->title = $model->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
+            'id',
             'title',
             'content',
             'tag',
             'create_time',
-            //'user_id',
-            //'team_id',
-            //'event_id',
+            'image',
+            'user_id',
+            'team_id',
+            'event_id',
         ],
     ]) ?>
+
 </div>

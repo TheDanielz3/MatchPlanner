@@ -13,6 +13,7 @@ use frontend\models\PostSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -98,7 +99,12 @@ class PostController extends Controller
             //var_dump($id_Respetivo_a_Passar);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $image = UploadedFile::getInstance($model, 'image');
+
+            $model->save();
+
             return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 

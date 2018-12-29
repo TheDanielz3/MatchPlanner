@@ -47,6 +47,14 @@ class Event extends \yii\db\ActiveRecord
         ];
     }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['event_name','begin_date','end_date','description','user_id','team_id'];
+
+        return $scenarios;
+    }
+
     /**
      * {@inheritdoc}
      */

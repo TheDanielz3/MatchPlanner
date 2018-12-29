@@ -19,8 +19,6 @@ $this->title = 'Create Post';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <br/>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

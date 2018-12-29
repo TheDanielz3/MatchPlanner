@@ -24,6 +24,7 @@ use Yii;
 class Comment extends \yii\db\ActiveRecord
 {
     const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'create';
     /**
      * {@inheritdoc}
      */
@@ -48,6 +49,15 @@ class Comment extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teamprofile::className(), 'targetAttribute' => ['team_id' => 'id']],
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['content', 'tag', 'create_time','event_id','post_id'];
+        $scenarios['update'] = ['content', 'tag', 'create_time','event_id','post_id'];
+
+        return $scenarios;
     }
 
     /**

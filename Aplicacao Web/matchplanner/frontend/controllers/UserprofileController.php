@@ -67,13 +67,22 @@ class UserprofileController extends Controller
     {
         $model = new Userprofile();
 
+        $nowDate = date('Y-m-d');
+        $birthdate = $model->birthdate;
+
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
-                return $this->redirect(['site/operations', 'id' => $model->id]);
+            if(strtotime($nowDate) < strtotime($birthdate))
+            {
+                return $this->redirect(['userprofile/create', 'id' => $model->id]);
+            }
+
+            return $this->redirect(['site/operations', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'nowDate' => $nowDate
         ]);
     }
 

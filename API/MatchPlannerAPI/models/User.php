@@ -25,6 +25,7 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
     /**
      * {@inheritdoc}
      */
@@ -47,6 +48,14 @@ class User extends \yii\db\ActiveRecord
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['username','email'];
+
+        return $scenarios;
     }
 
     /**

@@ -25,7 +25,7 @@ echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primar
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Are you sure you want to delete this user account?',
                 'method' => 'post',
             ],
         ]) ?>

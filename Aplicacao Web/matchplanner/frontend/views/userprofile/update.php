@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 $id = Yii::$app->user->identity->getId();
 
-echo "" . Html::a('Go back to profile', Url::toRoute(['/userprofile/view', 'id' => $id]));
+echo "" . Html::a('Go back to profile', Url::toRoute(['/userprofile/view', 'id' => $id]), ['class' => 'btn btn-primary']);
 
 $this->title = 'Update Solo Profile: ' . $model->id;
 //$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];

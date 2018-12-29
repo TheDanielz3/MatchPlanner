@@ -30,7 +30,25 @@ class CommentController extends \yii\web\Controller
         }
     }
 
-    public function actionGet()
+    public function actionGetComment($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        //Procura um comment com o ID inserido no URL
+        $comment = Comment::findOne($id);
+
+        //Retorna um unico comment
+        if(count($comment) > 0)
+        {
+            return array('status' => true, 'data' => $comment);
+        }
+        else
+        {
+            return array('status' => false, 'data' => 'No comment found');
+        }
+    }
+
+    public function actionIndex()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -46,9 +64,38 @@ class CommentController extends \yii\web\Controller
         }
     }
 
-    public function actionUpdate()
-    {}
+    public function actionUpdate($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-    public function actionDelete()
-    {}
+        $model = Comment::findOne($id);
+
+        $model->scenario = Comment::SCENARIO_UPDATE;
+        $model->attributes = \Yii::$app->request->isPut;
+
+        //Retorna um unico comment
+        if($model != null)
+        {
+            if($model->validate())
+            {
+                $model->save();
+
+                return array('status' => true, 'data' => $model);
+            }
+        }
+        else
+        {
+            echo "Comment does not exist";
+        }
+    }
+
+    public function actionDelete($id)
+    {
+        $comment = Comment::findOne($id);
+
+        if($comment != null)
+        {
+            $comment->delete();
+        }
+    }
 }

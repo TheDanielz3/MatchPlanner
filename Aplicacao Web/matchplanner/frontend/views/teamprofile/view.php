@@ -10,11 +10,11 @@ use yii\widgets\DetailView;
 //Return to main view
 $mainView = Url::toRoute('site/operations', true);
 echo "<br/>";
-echo "" . Html::a('Go back to main view', $mainView);
+echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primary']);
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Teamprofiles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = $model->id;
+//$this->params['breadcrumbs'][] = ['label' => 'Teamprofiles', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="teamprofile-view">
 

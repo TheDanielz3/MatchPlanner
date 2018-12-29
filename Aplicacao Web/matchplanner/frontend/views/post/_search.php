@@ -25,6 +25,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'create_time') ?>
 
+    <?php // echo $form->field($model, 'image') ?>
+
     <?php // echo $form->field($model, 'user_id') ?>
 
     <?php // echo $form->field($model, 'team_id') ?>

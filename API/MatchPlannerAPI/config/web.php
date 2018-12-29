@@ -51,10 +51,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'clientes'
-                ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'event'],
             ],
         ],
     ],

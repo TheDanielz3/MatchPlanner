@@ -9,6 +9,7 @@ use dosamigos\datepicker\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 
 $id = Yii::$app->user->identity->getId();
+//$nowDate = $this->params['nowDate'];
 ?>
 
 <div class="userprofile-form">
