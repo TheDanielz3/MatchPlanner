@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">MatchPlanner</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_login">MatchPlanner</string>
+
+
+    <!--Projeto MatchPlanner-->
+    <!--Atividade Login-->
+    <string name="textViewSignIn">Sign In</string>
+    <string name="buttonSignIn">Sign In</string>
+    <string name="textViewNewUser">New User</string>
+    <string name="buttonNewUser">Sign Up</string>
+    <string name="hintUsername">Username</string>
+
+    <!--Atividade escolher perfil-->
+    <string name="textViewProfilePick">Choose your profile type</string>
+    <string name="buttonSolo">Solo</string>
+    <string name="buttonTeam">Team</string>
+
+    <!--Atividade Sign Up Solo-->
+    <string name="textViewSignUp">Already registered? Click to go to login</string>
+    <string name="textViewFirstName">First Name</string>
+    <string name="hintFirstName">Insert your first name</string>
+
+    <string name="textViewLastName">Surnames</string>
+    <string name="hintLastName">Insert your surnames</string>
+
+    <string name="textViewEmail">Email</string>
+    <string name="hintEmail">Insert your email</string>
+
+    <string name="textViewSex">Sex</string>
+    <string name="checkBoxMale">Male</string>
+    <string name="checkBoxFemale">Female</string>
+
+    <string name="textViewBirthDate">Birth Date</string>
+    <string name="hintBirthDate">Insert your birth date</string>
+
+    <string name="textViewUsername">Username</string>
+    <string name="hintSUsername">Insert your solo profile username</string>
+
+    <string name="textViewPassword">Password</string>
+    <string name="hintPassword">Insert your password</string>
+
+    <string name="textViewRepeatPassword">Repeat Password</string>
+    <string name="hintRepeatPassword">Repeat your password</string>
+
+    <string name="buttonSignUp">Sign Up</string>
+
+    <!--Atividade Sign Up Team-->
+    <string name="textViewTeamName">Team Name</string>
+    <string name="hintTeamName">Insert your team name</string>
+
+    <string name="textViewTeamEmail">Email</string>
+    <string name="hintTeamEmail">Insert your email</string>
+
+    <string name="hintTeamUsername">Insert your team profile username</string>
+
+    <string name="textViewTeamPassword">Password</string>
+
+    <!--Atividade Main View-->
+    <string name="textViewMainView">Welcome to MatchPlanner!\nChoose what you want to do</string>
+
+    <string name="buttonSeeProfile">See profile</string>
+    <string name="buttonCreateEvent">Create event</string>
+
+    <!--Atividade Create event-->
+    <string name="textViewCreateEvent">Create an event!</string>
+
+    <string name="textViewEventName">Event name</string>
+    <string name="hintEventName">Insert the event name</string>
+
+    <string name="textViewBeginDate">Begin Date</string>
+    <string name="hintBeginDate">Insert the event begin date</string>
+
+    <string name="textViewEndDate">End Date</string>
+    <string name="hintEndDate">Insert the event end date</string>
+
+    <string name="textViewDescription">Description</string>
+    <string name="hintDescription">Insert the event description</string>
+
+    <string name="buttonOnViewCreateEvent">Create Event</string>
+    <string name="Erro_vazio">Nao pode deixar o campo vazio!</string>
+</resources>
