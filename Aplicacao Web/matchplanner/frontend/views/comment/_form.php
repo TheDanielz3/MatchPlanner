@@ -29,7 +29,7 @@ if($selecao == 2)
 }
 ?>
 
-<div class="comment-form">
+<div class="comment-form" style="color: #ffffff">
 
     <?php $form = ActiveForm::begin(); ?>
 

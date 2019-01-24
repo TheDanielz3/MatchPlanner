@@ -3,6 +3,7 @@
 namespace backend\modules\api\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "userprofile".
@@ -18,9 +19,8 @@ use Yii;
  * @property User $user
  * @property Teamprofile $team
  */
-class Userprofile extends \yii\db\ActiveRecord
+class Userprofile extends ActiveRecord
 {
-    const SCENARIO_CREATE = 'create';
     /**
      * {@inheritdoc}
      */
@@ -35,7 +35,7 @@ class Userprofile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'firstname', 'surnames', 'birthdate', 'sex'], 'required'],
+            [['id','firstname', 'surnames', 'birthdate', 'sex'], 'required'],
             [['id', 'user_id', 'team_id'], 'integer'],
             [['birthdate'], 'safe'],
             [['firstname', 'surnames'], 'string', 'max' => 50],

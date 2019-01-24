@@ -1,6 +1,9 @@
 <?php
 
-    use yii\helpers\Html;
+use yii\bootstrap\ButtonDropdown;
+use yii\bootstrap\Dropdown;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
     use yii\grid\GridView;
     use tecnocen\hoverdropdown\HoverDropdownAssetBundle;
     use yii\helpers\Url;
@@ -16,11 +19,11 @@
     //$this->title = 'Login';
     //$this->params['breadcrumbs'][] = $this->title;
     $id = Yii::$app->user->identity->getId();
-    //$idTeam = Yii::$app->user->identity->getId();
 
     $perfil = Url::to(['user/view', 'id' => $id]);
     $perfilSolo = Url::to(['userprofile/view', 'id' => $id]);
     $perfilTeam = Url::to(['teamprofile/view', 'id' => $id]);
+    $criarPerfil = Url::toRoute('site/match', true);
     $criarEvento = Url::toRoute('event/create', true);
 
     echo "<br/>";
@@ -44,8 +47,12 @@
         echo "<br/><br/>";
     }
 
-    echo "" . Html::a('Create event', $criarEvento,['class' => 'btn btn-primary']);
-    echo "<br/><br/><br/>";
+    //Se profile existir é permitido criar eventos
+    if($user || $team != null)
+    {
+        echo "" . Html::a('Create event', $criarEvento, ['class' => 'btn btn-primary']);
+        echo "<br/><br/><br/>";
+    }
 
     //Total de eventos
     $eventos = Event::findAll([
@@ -57,7 +64,11 @@
         'team_id' => $id
     ]);
 
-    echo "Eventos" . "<br/>";
+    ?>
+
+    <?php
+
+    echo "<h3 style='color: #ffffff'>Events</h3>" . "<br/>";
 
     //Eventos de perfis solo
     foreach($eventos as $evento)
@@ -67,9 +78,11 @@
 
         //Imprime hyperlink para aceder
         echo "<br/>" . Html::a($evento->event_name, $urlEvento, ['class' => 'btn btn-primary']) . "<br/>";
-
-        //HoverDropdownAssetBundle::register();
     }
+
+    ?>
+
+    <?php
 
     //Eventos de perfis teams
     foreach($eventosT as $evento)

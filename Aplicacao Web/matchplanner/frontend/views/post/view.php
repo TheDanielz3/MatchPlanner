@@ -26,19 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'content',
-            'tag',
-            'create_time',
-            'image',
-            'user_id',
-            'team_id',
-            'event_id',
-        ],
-    ]) ?>
+    <div class="detail">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'id',
+                'title',
+                'content',
+                'tag',
+                'create_time',
+                /*[
+                    'attribute' => 'image',
+                    'value' => Yii::getAlias('@imageUrl') . '/' . $model->image,
+                    'format' => ['image', ['width' => '400', 'height' => '400']]
+                ],*/
+                'user_id',
+                'team_id',
+                'event_id',
+            ],
+        ]) ?>
+    </div>
 
 </div>

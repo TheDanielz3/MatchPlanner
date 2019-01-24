@@ -14,7 +14,7 @@ $this->title = 'Update Post';
 //$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 //$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="post-update">
+<div class="post-update" style="color:#ffffff;">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

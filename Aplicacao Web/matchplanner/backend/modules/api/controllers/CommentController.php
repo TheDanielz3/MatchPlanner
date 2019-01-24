@@ -3,17 +3,35 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\models\Comment;
+use yii\db\ActiveRecord;
+use yii\rest\ActiveController;
+use yii\web\Cookie;
+use yii\web\Response;
+use Yii;
 
-class CommentController extends \yii\web\Controller
+class CommentController extends ActiveController
 {
-    public function actionCreateComment()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    public $modelClass = 'backend\modules\api\models\Comment';
 
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['contentNegotiator'] = [
+
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Yii::$app->response->format = Response::FORMAT_JSON,
+            ]
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionCreate()
+    {
         $model = new Comment();
-
-        $model->scenario = Comment::SCENARIO_CREATE;
-        $model->attributes = \Yii::$app->request->post();
+        $model->attributes = Yii::$app->request->post();
 
         if($model->validate())
         {
@@ -27,49 +45,19 @@ class CommentController extends \yii\web\Controller
         }
     }
 
-    //Mostra um único post
-    public function actionGetComment($id)
+    //Mostra um único post (funciona)
+    public function actionView($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
         //Modelo correspondente ao id
-        $model = Comment::findOne($id);
+        $model = $this->findModel($id);
 
-        if(count($model) > 0)
-        {
-            //Devolve modelo em JSON
-            return array('status' => true, 'data' => $model);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'Comment not found');
-        }
+        //Devolve modelo em JSON
+        return array('status' => true, 'data' => $model);
     }
 
-    //Mostra os eventos todos
-    public function actionGetComments()
+    public function actionUpdate($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $comments = Comment::find()->all();
-
-        if(count($comments) > 0)
-        {
-            return array('status' => true, 'data' => $comments);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'No comments found');
-        }
-    }
-
-    public function actionUpdatePost($id)
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $model = Post::findOne($id);
-
-        $model->scenario = Post::SCENARIO_UPDATE;
+        $model = $this->findModel($id);
         $model->attributes = \Yii::$app->request->post();
 
         if($model->validate())
@@ -84,19 +72,21 @@ class CommentController extends \yii\web\Controller
         }
     }
 
-    //Apaga um evento
-    public function actionDeletePost($id)
+    //Apaga um evento (funciona)
+    public function actionDelete($id)
     {
-        $model = Post::findOne($id);
+        $model = $this->findModel($id);
 
-        if($model != null)
+        $model->delete();
+    }
+
+    protected function findModel($id)
+    {
+        if(($model = Comment::findOne($id)) !== null)
         {
-            foreach($model->comments as $comment)
-            {
-                $comment->delete();
-            }
+            return $model;
         }
 
-        return $this->redirect(['get-posts']);
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

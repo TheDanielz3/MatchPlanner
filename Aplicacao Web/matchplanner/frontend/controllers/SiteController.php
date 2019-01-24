@@ -1,8 +1,10 @@
 <?php
+
 namespace frontend\controllers;
 
 use frontend\models\Event;
 use frontend\models\Teamprofile;
+use frontend\models\UploadForm;
 use frontend\models\Userprofile;
 use Yii;
 use yii\base\InvalidParamException;
@@ -37,8 +39,14 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
                         'actions' => ['logout'],
                         'allow' => true,
+                        //'roles' => ['@'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -85,7 +93,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest)
+        {
             return $this->goHome();
         }
 
@@ -175,9 +184,12 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
+        if ($model->load(Yii::$app->request->post()))
+        {
+            if ($user = $model->signup())
+            {
+                if (Yii::$app->getUser()->login($user))
+                {
                     return $this->render('match');
                 }
             }
@@ -249,5 +261,21 @@ class SiteController extends Controller
     {
         //Mostra a vista "Main" do matchplanner
         return $this->render('operations');
+    }
+
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'image');
+
+            if ($model->upload())
+            {
+                return;
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
     }
 }

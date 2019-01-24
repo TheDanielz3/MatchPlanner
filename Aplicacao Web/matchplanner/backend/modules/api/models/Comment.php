@@ -3,6 +3,7 @@
 namespace backend\modules\api\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "comment".
@@ -21,11 +22,8 @@ use Yii;
  * @property User $user
  * @property Teamprofile $team
  */
-class Comment extends \yii\db\ActiveRecord
+class Comment extends ActiveRecord
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_UPDATE = 'update';
-    const SCENARIO_DELETE = 'delete';
     /**
      * {@inheritdoc}
      */
@@ -52,9 +50,13 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
-    public function scenarios()
+    /*public function scenarios()
     {
-    }
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['content', 'tag', 'create-time', 'event_id', 'post_id'];
+
+        return $scenarios;
+    }*/
 
     /**
      * {@inheritdoc}

@@ -13,8 +13,9 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use dosamigos\datepicker\DatePicker;
-use dosamigos\datetimepicker\DateTimePicker;
+//use dosamigos\datepicker\DatePicker;
+//use dosamigos\datetimepicker\DateTimePicker;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Event */
@@ -39,44 +40,33 @@ if($selecao == 2)
 
 ?>
 
-<div class="event-form">
+<div class="event-form" style="color: #ffffff">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'event_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'begin_date')->widget(DateTimePicker::className(), [
-        'language' => 'pt',
-        'size' => 'ms',
-        //'template' => '{input}',
-        'pickButtonIcon' => 'glyphicon glyphicon-time',
-        'inline' => true,
-        'clientOptions' => [
-            'startView' => 1,
-            'minView' => 0,
-            'maxView' => 1,
-            'autoclose' => true,
-            'linkFormat' => 'yyyy-mm-dd hh:mm', // if inline = true
-             'format' => 'dd-mm-yyyy', // if inline = false
-            'todayBtn' => true
-        ]
+        'type' => DateTimePicker::TYPE_INPUT,
+            'pluginOptions' => [
+                    'todayHighlight' => true,
+                    'todayBtn' => true,
+                    'format' => 'yyyy-m-d hh:ii',
+                'startDate' >= date('Y-m-d H:i:s'),
+                'autoclose' => true,
+                'readonly' => 'readonly',
+            ]
     ]); ?>
 
-
     <?= $form->field($model, 'end_date')->widget(DateTimePicker::className(), [
-        'language' => 'pt',
-        'size' => 'ms',
-        'template' => '{input}',
-        'pickButtonIcon' => 'glyphicon glyphicon-time',
-        'inline' => true,
-        'clientOptions' => [
-            'startView' => 1,
-            'minView' => 0,
-            'maxView' => 1,
+        'type' => DateTimePicker::TYPE_INPUT,
+        'pluginOptions' => [
+            'todayHighlight' => true,
+            'todayBtn' => true,
+            'format' => 'yyyy-m-d hh:ii',
+            'startDate' >= date('Y-m-d H:i:s'),
             'autoclose' => true,
-            'linkFormat' => 'yyyy-mm-dd hh:mm', // if inline = true
-            'format' => 'dd-mm-yyyy', // if inline = false
-            'todayBtn' => true
+            'readonly' => 'readonly',
         ]
     ]); ?>
 

@@ -2,13 +2,18 @@
 
 namespace frontend\controllers;
 
+//use common\widgets\Alert;
 use Faker\Provider\DateTime;
+use kartik\alert\AlertBlock;
+use kartik\dialog\Dialog;
 use Yii;
 use frontend\models\Userprofile;
 use frontend\models\UserprofileSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\dialog\DialogAsset;
+use kartik\alert\Alert;
 
 /**
  * UserprofileController implements the CRUD actions for Userprofile model.
@@ -67,17 +72,15 @@ class UserprofileController extends Controller
     {
         $model = new Userprofile();
 
+        //Data atual
         $nowDate = date('Y-m-d');
-        $birthdate = $model->birthdate;
 
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
-            if(strtotime($nowDate) < strtotime($birthdate))
+            if(strtotime($model->birthdate) < strtotime($nowDate))
             {
-                return $this->redirect(['userprofile/create', 'id' => $model->id]);
+                return $this->redirect(['site/operations', 'id' => $model->id]);
             }
-
-            return $this->redirect(['site/operations', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -97,13 +100,33 @@ class UserprofileController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        //Data atual
+        $nowDate = date('Y-m-d');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            if(strtotime($model->birthdate) <= strtotime($nowDate))
+            {
+                return $this->redirect(['userprofile/view', 'id' => $model->id]);
+            }
+            else
+            {
+                //echo "<script type='text/javascript'>confirm('Invalid birthdate');</script>";
+
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    private function phpAlert($msg)
+    {
+        echo '<script type="text/javascript">alert("' . $msg . '")</script>';
     }
 
     /**

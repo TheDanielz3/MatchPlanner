@@ -93,7 +93,6 @@ class CommentController extends Controller
             $id_Respetivo_a_Passar = $Team;
             $selecao = 2;
             //var_dump($id_Respetivo_a_Passar);
-
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

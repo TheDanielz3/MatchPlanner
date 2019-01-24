@@ -24,9 +24,6 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_UPDATE = 'update';
-    const SCENARIO_DELETE = 'delete';
     /**
      * {@inheritdoc}
      */

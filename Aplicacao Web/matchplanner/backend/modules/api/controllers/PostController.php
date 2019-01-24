@@ -3,17 +3,37 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\models\Post;
+use backend\modules\api\models\Teamprofile;
+use yii\filters\VerbFilter;
+use yii\rest\ActiveController;
+use yii\web\Controller;
+use yii\web\Cookie;
+use yii\web\Response;
+use Yii;
 
-class PostController extends \yii\web\Controller
+class PostController extends ActiveController
 {
-    public function actionCreatePost()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    public $modelClass = 'backend\modules\api\models\Post';
 
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['contentNegotiator'] = [
+
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Yii::$app->response->format = Response::FORMAT_JSON,
+            ],
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionCreate()
+    {
         $model = new Post();
-
-        $model->scenario = Post::SCENARIO_CREATE;
-        $model->attributes = \Yii::$app->request->post();
+        $model->attributes = Yii::$app->request->post();
 
         if($model->validate())
         {
@@ -27,76 +47,46 @@ class PostController extends \yii\web\Controller
         }
     }
 
-    //Mostra um único post
-    public function actionGetPost($id)
+    //Mostra um único post (funciona)
+    public function actionView($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
         //Modelo correspondente ao id
-        $model = Post::findOne($id);
+        $model = $this->findModel($id);
 
-        if(count($model) > 0)
-        {
-            //Devolve modelo em JSON
-            return array('status' => true, 'data' => $model);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'Post not found');
-        }
+        //Devolve modelo em JSON
+        return array('status' => true, 'data' => $model);
     }
 
-    //Mostra os eventos todos
-    public function actionGetPosts()
+    public function actionUpdate($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = $this->findModel($id);
+        $model->attributes = Yii::$app->request->post();
 
-        $posts = Post::find()->all();
+        $model->save();
 
-        if(count($posts) > 0)
-        {
-            return array('status' => true, 'data' => $posts);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'No posts found');
-        }
+        return array('status' => true, 'data' => $model);
     }
 
-    public function actionUpdatePost($id)
+    //Apaga um post (funciona)
+    public function actionDelete($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = $this->findModel($id);
 
-        $model = Post::findOne($id);
-
-        $model->scenario = Post::SCENARIO_UPDATE;
-        $model->attributes = \Yii::$app->request->post();
-
-        if($model->validate())
+        foreach($model->comments as $comment)
         {
-            $model->save();
+            $comment->delete();
+        }
 
-            return array('status' => true, 'data' => $model);
-        }
-        else
-        {
-            return array('status' => false, 'data' => $model->getErrors());
-        }
+        $model->delete();
     }
 
-    //Apaga um evento
-    public function actionDeletePost($id)
+    protected function findModel($id)
     {
-        $model = Post::findOne($id);
-
-        if($model != null)
+        if(($model = Post::findOne($id)) !== null)
         {
-            foreach($model->comments as $comment)
-            {
-                $comment->delete();
-            }
+            return $model;
         }
 
-        return $this->redirect(['get-posts']);
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

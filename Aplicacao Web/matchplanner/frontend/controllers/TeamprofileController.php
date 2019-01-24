@@ -66,7 +66,8 @@ class TeamprofileController extends Controller
     {
         $model = new Teamprofile();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
             return $this->redirect(['site/operations', 'id' => $model->id]);
         }
 

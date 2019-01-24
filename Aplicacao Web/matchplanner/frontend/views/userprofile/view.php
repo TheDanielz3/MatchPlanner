@@ -24,17 +24,19 @@ echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primar
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            //'id',
-            'firstname',
-            'surnames',
-            'birthdate',
-            'sex',
-            //'user_id',
-            //'team_id',
-        ],
-    ]) ?>
+    <div class="detail">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                //'id',
+                'firstname',
+                'surnames',
+                'birthdate',
+                'sex',
+                //'user_id',
+                //'team_id',
+            ],
+        ]) ?>
+    </div>
 
 </div>

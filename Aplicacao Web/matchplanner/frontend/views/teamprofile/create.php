@@ -3,19 +3,20 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Teamprofile */
+
+
 //Link para voltar atrás
 $profileView = Url::toRoute('site/match', true);
 echo "<br/>";
 echo "" . Html::a('Go back', $profileView, ['class' => 'btn btn-primary']);
 
-/* @var $this yii\web\View */
-/* @var $model frontend\models\Teamprofile */
-
 $this->title = 'Create Team Profile';
 //$this->params['breadcrumbs'][] = ['label' => 'Teamprofiles', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="teamprofile-create">
+<div class="teamprofile-create" style="color: #ffffff">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

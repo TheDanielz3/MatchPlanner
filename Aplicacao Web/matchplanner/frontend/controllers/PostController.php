@@ -59,10 +59,11 @@ class PostController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $id = Yii::$app->user->identity->getId();
 
         return $this->render('view', [
             'model' => $model,
-            'idEvent' => $model->event->id
+            'idEvent' => $model->event->id,
         ]);
     }
 
@@ -101,10 +102,21 @@ class PostController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
+            //$postID = $model->id;
+
+            /*$model->event_id = $idEvent;
+
             $image = UploadedFile::getInstance($model, 'image');
+
+            $imgName = $model->id . ' . ' . $image->getExtension();
+
+            $image->saveAs(Yii::getAlias('@imagePostPath') . '/' . $imgName);
+
+            $model->image = $imgName;*/
 
             $model->save();
 
+            //return $this->redirect(['/post/view', 'id' => $model->id]);
             return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 
@@ -128,6 +140,8 @@ class PostController extends Controller
         $model = $this->findModel($id);
 
         $id = Yii::$app->user->identity->getId();
+
+        //Recebe o ID do Post
         $idEvent = Yii::$app->request->get('event_id');
 
         //TEAM ID E SOLO TEM O MESMO ID  DO USER DONT FORGET!!
@@ -151,7 +165,21 @@ class PostController extends Controller
             //var_dump($id_Respetivo_a_Passar);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            /*$model->event_id = $idEvent;
+
+            $image = UploadedFile::getInstance($model, 'image');
+
+            $imgName = $model->id . ' . ' . $image->getExtension();
+
+            $image->saveAs(Yii::getAlias('@imagePostPath') . '/' . $imgName);
+
+            $model->image = $imgName;
+
+            $model->save();
+
+            return $this->redirect(['/post/view', 'id' => $model->id]);*/
             return $this->redirect(['/event/view', 'id' => $idEvent]);
         }
 
@@ -182,7 +210,7 @@ class PostController extends Controller
         }
 
         //Apaga o post
-        $this->findModel($id)->delete();
+        $model->delete();
 
         //Redireciona para o evento respetivo onde estava
         return $this->redirect(['event/view', 'id' => $idEvent]);

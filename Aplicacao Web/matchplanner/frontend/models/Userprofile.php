@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "userprofile".
@@ -18,7 +19,7 @@ use Yii;
  * @property User $user
  * @property Teamprofile $team
  */
-class Userprofile extends \yii\db\ActiveRecord
+class Userprofile extends ActiveRecord
 {
     /**
      * {@inheritdoc}

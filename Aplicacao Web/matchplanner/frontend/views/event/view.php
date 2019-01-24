@@ -21,7 +21,7 @@ $this->title = $model->event_name;
 ?>
 <div class="event-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 style="color: #ffffff"><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update Event', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -34,21 +34,23 @@ $this->title = $model->event_name;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-           // 'id',
-            'event_name',
-            'begin_date',
-            'end_date',
-            'description',
-            //'user_id',
-            //'team_id',
-        ],
-    ]) ?>
+    <div class="detail">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                //'id',
+                'event_name',
+                'begin_date',
+                'end_date',
+                'description'
+                //'user_id',
+                //'team_id',
+            ],
+        ]) ?>
+    </div>
+
 
   <?php
-
 
       $createPost = Url::to(['post/create', 'event_id' => $model->id]);
 
@@ -67,9 +69,16 @@ $this->title = $model->event_name;
       foreach($posts as $post)
       {
           $urlPost = Url::toRoute(['event/view', 'id' => $post->id]);
-          echo "<br/><br/><br/>" . "Title --> " . $post->title;
-          echo "<br/>" . "Content --> " . $post->content;
-          echo "<br/>" . "Tag --> " . $post->tag . "<br/>";
+          echo "<br/><br/><br/>" . "<h1 style='color: #ffffff'>" . $post->title . "</h1>";
+          //echo "<br/><h4>" . $post->content . "</h4>";
+
+          ?>
+
+          <textarea disabled readonly="readonly" rows="5" cols="50" style="resize: none"><?= $post->content . "\n\n" ?></textarea>
+
+          <?php
+
+          echo "<br/><h5 style='background-color: #a4d1ff; float:left; display:inline-block; background-size: 900px 100px;'  '>#" . $post->tag . "</h5>";
           echo "<br/><br/>" . Html::a('Update Post', ['post/update', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-primary']);
           //echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], ['class' => 'btn btn-danger']);
           echo " " . Html::a('Delete Post', ['post/delete', 'id' => $post->id, 'event_id' => $model->id], [
@@ -92,7 +101,11 @@ $this->title = $model->event_name;
           {
               $urlComment = Url::toRoute(['event/view', 'id' => $post->id]);
               echo "<br/><pre style='background-color: white'>" . $comment->content . "</pre>";
-              echo "<pre style='background-color: #3399ff'>" . $comment->tag . "</pre>";
+              ?>
+
+            <?php
+
+              echo "<h5 style='background-color: #a4d1ff; float:left; display:inline-block; background-size: 900px 100px;'  '>#" . $comment->tag . "</h5><br/>";
               echo Html::a('Delete Comment', ['comment/delete', 'event_id' => $model->id, 'post_id' => $post->id, 'id' => $comment->id], [
                   'class' => 'btn btn-danger pull-right',
                   'data' => [

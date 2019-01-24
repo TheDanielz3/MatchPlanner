@@ -21,8 +21,11 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "kartik-v/yii2-widget-datetimepicker": "*",
         "2amigos/yii2-date-picker-widget": "*",
+        "kartik-v/yii2-dialog": "1.0.x-dev",
         "2amigos/yii2-date-time-picker-widget": "~1.0",
-        "yiisoft/yii2-jui": "^2.0"
+        "yiisoft/yii2-jui": "^2.0",
+        "kartik-v/yii2-widget-growl": "1.1.x-dev",
+        "kartik-v/yii2-widget-alert": "1.1.x-dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

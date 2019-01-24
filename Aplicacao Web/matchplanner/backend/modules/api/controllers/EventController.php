@@ -2,21 +2,33 @@
 
 namespace backend\modules\api\controllers;
 
-use backend\modules\api\models\Teamprofile;
 use backend\modules\api\models\Event;
+use yii\rest\ActiveController;
+use yii\web\Response;
 
-class EventController extends \yii\web\Controller
+class EventController extends ActiveController
 {
-    public $enableCsrfValidation = false;
+    public $modelClass = 'backend\modules\api\models\Event';
 
-    //Cria um novo evento na BD
-    public function actionCreateEvent()
+    public function behaviors()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $behaviors = parent::behaviors();
 
+        $behaviors['contentNegotiator'] = [
+
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => \Yii::$app->response->format = Response::FORMAT_JSON,
+            ]
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionCreate()
+    {
         $model = new Event();
 
-        $model->scenario = Event::SCENARIO_CREATE;
         $model->attributes = \Yii::$app->request->post();
 
         if($model->validate())
@@ -31,49 +43,20 @@ class EventController extends \yii\web\Controller
         }
     }
 
-    //Mostra um único evento
-    public function actionGetEvent($id)
+    //Mostra um único evento (funciona)
+    public function actionView($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
         //Modelo correspondente ao id
-        $model = Event::findOne($id);
+        $model = $this->findModel($id);
 
-        if(count($model) > 0)
-        {
-            //Devolve modelo em JSON
-            return array('status' => true, 'data' => $model);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'Event not found');
-        }
+        //Devolve modelo em JSON
+        return array('status' => true, 'data' => $model);
     }
 
-    //Mostra os eventos todos
-    public function actionGetEvents()
+    public function actionUpdate($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = $this->findModel($id);
 
-        $eventos = Event::find()->all();
-
-        if(count($eventos) > 0)
-        {
-            return array('status' => true, 'data' => $eventos);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'No events found');
-        }
-    }
-
-    public function actionUpdateEvent($id)
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $model = Event::findOne($id);
-
-        $model->scenario = Event::SCENARIO_UPDATE;
         $model->attributes = \Yii::$app->request->post();
 
         if($model->validate())
@@ -88,26 +71,31 @@ class EventController extends \yii\web\Controller
         }
     }
 
-    //Apaga um evento
-    public function actionDeleteEvent($id)
+    //Apaga um evento (funciona)
+    public function actionDelete($id)
     {
-        $model = Event::findOne($id);
+        $model = $this->findModel($id);
 
-        if($model != null)
+        foreach($model->comments as $comment)
         {
-            foreach($model->comments as $comment)
-            {
-                $comment->delete();
-            }
-
-            foreach($model->posts as $post)
-            {
-                $post->delete();
-            }
-
-            $model->delete();
+            $comment->delete();
         }
 
-        return $this->redirect(['get-events']);
+        foreach($model->posts as $post)
+        {
+            $post->delete();
+        }
+
+        $model->delete();
+    }
+
+    protected function findModel($id)
+    {
+        if(($model = Event::findOne($id)) !== null)
+        {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

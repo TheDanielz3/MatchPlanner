@@ -3,6 +3,7 @@
 namespace backend\modules\api\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "event".
@@ -20,11 +21,8 @@ use Yii;
  * @property Teamprofile $team
  * @property Post[] $posts
  */
-class Event extends \yii\db\ActiveRecord
+class Event extends ActiveRecord
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_UPDATE = 'update';
-    const SCENARIO_DELETE = 'delete';
     /**
      * {@inheritdoc}
      */
@@ -40,21 +38,13 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['event_name', 'begin_date', 'end_date', 'description'], 'required'],
-            /*[['begin_date', 'end_date'], 'safe'],
+            [['begin_date', 'end_date'], 'safe'],
             [['user_id', 'team_id'], 'integer'],
             [['event_name'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 500],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
-            [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teamprofile::className(), 'targetAttribute' => ['team_id' => 'id']],*/
+            [['team_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teamprofile::className(), 'targetAttribute' => ['team_id' => 'id']],
         ];
-    }
-
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['create'] = ['event_name', 'begin_date', 'end_date', 'description'];
-
-        return $scenarios;
     }
 
     /**

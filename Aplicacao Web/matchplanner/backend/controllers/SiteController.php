@@ -24,9 +24,14 @@ class SiteController extends Controller
                     [
                         'actions' => ['login', 'error'],
                         'allow' => true,
+                        //'roles' => ['admin']
                     ],
                     [
                         'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['admin', 'user'],
+                    ],
+                    [
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -70,12 +75,23 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest)
+        {
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+            $role = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
+
+            if (!array_key_exists('admin', $role))
+            {
+                Yii::$app->user->logout();
+                return $this->goBack();
+                //return $this->redirect([\yii\helpers\Url::base() . '/frontend/site/login']);
+            }
+
             return $this->goBack();
         } else {
             $model->password = '';

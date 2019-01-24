@@ -12,7 +12,7 @@ $id = Yii::$app->user->identity->getId();
 //$nowDate = $this->params['nowDate'];
 ?>
 
-<div class="userprofile-form">
+<div class="userprofile-form" style="color: #ffffff">
 
     <?php $form = ActiveForm::begin(); ?>
 
