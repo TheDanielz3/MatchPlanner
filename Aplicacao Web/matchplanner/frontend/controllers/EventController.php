@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use DateTime;
+use DateTimeZone;
 use frontend\models\Teamprofile;
 use frontend\models\User;
 use frontend\models\Userprofile;
@@ -76,25 +78,32 @@ class EventController extends Controller
 
         $Solo = Userprofile::findAll($id);
 
+        //Data/Hora atual
+        $now = new DateTime();
+        $beginDate = new DateTime($model->begin_date);
+
         //Selecao de solo é igual 1
         if($Solo != null)
         {
             $id_Respetivo_a_Passar = $Solo;
             $selecao = 1;
             //var_dump($id_Respetivo_a_Passar);
-
         }
+
         //Selecao de Team é igual a 2
         if($Team != null)
         {
             $id_Respetivo_a_Passar = $Team;
             $selecao = 2;
             //var_dump($id_Respetivo_a_Passar);
-
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            if($beginDate > $now)
+            {
+                return $this->redirect(['event/view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create',[
@@ -139,8 +148,9 @@ class EventController extends Controller
             //var_dump($id_Respetivo_a_Passar);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

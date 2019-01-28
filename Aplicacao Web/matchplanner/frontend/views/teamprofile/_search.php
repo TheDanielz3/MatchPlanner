@@ -19,9 +19,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'team_name') ?>
 
-    <?= $form->field($model, 'members') ?>
+    <?= $form->field($model, 'member1') ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'member2') ?>
+
+    <?= $form->field($model, 'member3') ?>
+
+    <?php // echo $form->field($model, 'member4') ?>
+
+    <?php // echo $form->field($model, 'member5') ?>
+
+    <?php // echo $form->field($model, 'member6') ?>
+
+    <?php // echo $form->field($model, 'user_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -8,7 +8,6 @@
 
 namespace frontend\models;
 
-
 class Calculadora
 {
     public function soma($num1, $num2)

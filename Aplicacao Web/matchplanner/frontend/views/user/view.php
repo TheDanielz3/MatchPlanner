@@ -31,19 +31,21 @@ echo "" . Html::a('Go back to main view', $mainView, ['class' => 'btn btn-primar
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            //'id',
-            'username',
-            //'auth_key',
-            //'password_hash',
-            //'password_reset_token',
-            'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-        ],
-    ]) ?>
+    <div class="detail">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                //'id',
+                'username',
+                //'auth_key',
+                //'password_hash',
+                //'password_reset_token',
+                'email:email',
+                //'status',
+                //'created_at',
+                //'updated_at',
+            ],
+        ]) ?>
+    </div>
 
 </div>

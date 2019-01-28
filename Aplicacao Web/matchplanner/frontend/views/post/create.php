@@ -15,7 +15,7 @@ $this->title = 'Create Post';
 //$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-create">
+<div class="post-create" style="color: #ffffff">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

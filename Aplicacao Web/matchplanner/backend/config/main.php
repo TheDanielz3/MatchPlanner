@@ -45,11 +45,38 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/user',
+                    'pluralize' => 'false',
+
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/userprofile',
+                    'pluralize' => 'false',
+
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/teamprofile',
+                    'pluralize' => 'false',
+
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/event',
+                    'pluralize' => 'false',
+
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/post',
+                    'pluralize' => 'false',
+
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/comment',
+                    'pluralize' => 'false',
+
+                    /*'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                    '<controller:\w+>/<id:\d+>' => '<controller>/view',*/
+                ],
             ],
         ],
     ],
+
     'params' => $params,
 ];

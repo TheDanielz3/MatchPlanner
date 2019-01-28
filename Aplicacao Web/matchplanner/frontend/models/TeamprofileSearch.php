@@ -2,7 +2,6 @@
 
 namespace frontend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Teamprofile;
@@ -19,7 +18,7 @@ class TeamprofileSearch extends Teamprofile
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['team_name', 'members'], 'safe'],
+            [['team_name', 'member1', 'member2', 'member3', 'member4', 'member5', 'member6'], 'safe'],
         ];
     }
 
@@ -64,7 +63,12 @@ class TeamprofileSearch extends Teamprofile
         ]);
 
         $query->andFilterWhere(['like', 'team_name', $this->team_name])
-            ->andFilterWhere(['like', 'members', $this->members]);
+            ->andFilterWhere(['like', 'member1', $this->member1])
+            ->andFilterWhere(['like', 'member2', $this->member2])
+            ->andFilterWhere(['like', 'member3', $this->member3])
+            ->andFilterWhere(['like', 'member4', $this->member4])
+            ->andFilterWhere(['like', 'member5', $this->member5])
+            ->andFilterWhere(['like', 'member6', $this->member6]);
 
         return $dataProvider;
     }

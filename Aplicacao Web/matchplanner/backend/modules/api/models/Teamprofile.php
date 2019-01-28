@@ -9,7 +9,12 @@ use Yii;
  *
  * @property int $id
  * @property string $team_name
- * @property string $members
+ * @property string $member1
+ * @property string $member2
+ * @property string $member3
+ * @property string $member4
+ * @property string $member5
+ * @property string $member6
  * @property int $user_id
  *
  * @property Comment[] $comments
@@ -20,9 +25,6 @@ use Yii;
  */
 class Teamprofile extends \yii\db\ActiveRecord
 {
-    const SCENARIO_CREATE = 'create';
-    const SCENARIO_UPDATE = 'update';
-    const SCENARIO_DELETE = 'delete';
     /**
      * {@inheritdoc}
      */
@@ -37,10 +39,9 @@ class Teamprofile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'team_name', 'members', 'user_id'], 'required'],
+            [['id', 'team_name', 'member1', 'member2', 'member3', 'member4', 'member5', 'member6', 'user_id'], 'required'],
             [['id', 'user_id'], 'integer'],
-            [['team_name'], 'string', 'max' => 100],
-            [['members'], 'string', 'max' => 1200],
+            [['team_name', 'member1', 'member2', 'member3', 'member4', 'member5', 'member6'], 'string', 'max' => 100],
             [['id'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -54,7 +55,12 @@ class Teamprofile extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'team_name' => 'Team Name',
-            'members' => 'Members',
+            'member1' => 'Member1',
+            'member2' => 'Member2',
+            'member3' => 'Member3',
+            'member4' => 'Member4',
+            'member5' => 'Member5',
+            'member6' => 'Member6',
             'user_id' => 'User ID',
         ];
     }

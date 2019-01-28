@@ -12,7 +12,6 @@ class m181112_181648_init_rbac extends Migration
      */
     public function safeUp()
     {
-
     }
 
     /**

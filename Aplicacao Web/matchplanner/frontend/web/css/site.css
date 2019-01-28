@@ -1,8 +1,16 @@
 html,
-body {
+body
+{
     height: 100%;
-    //background-image: url("background_matchplanner.jpg");
+    background-image: url("../../images/pexels-photo-929831.jpeg");
+    background-attachment: fixed;
     background-position: center;
+    opacity: revert;
+}
+
+.detail
+{
+    background-color: #ffffff;
 }
 
 .wrap {
@@ -10,6 +18,19 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
+}
+
+#container
+{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 30px;
+    width: 200px;
+    left: 52%;
+    top: 40%;
+    margin-top: -15px;   /* = -height / 2   */
+    margin-left: -100px; /* = -width / 2    */
+    position: fixed;     /* Fixed is better */
 }
 
 .wrap > .container {
@@ -26,6 +47,7 @@ body {
 .jumbotron {
     text-align: center;
     background-color: transparent;
+    color: #ffffff;
 }
 
 .jumbotron .btn {

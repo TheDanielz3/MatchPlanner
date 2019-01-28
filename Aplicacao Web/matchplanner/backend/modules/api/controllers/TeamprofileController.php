@@ -3,16 +3,33 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\models\Teamprofile;
+use yii\rest\ActiveController;
+use Yii;
+use yii\web\Response;
 
-class TeamprofileController extends \yii\web\Controller
+class TeamprofileController extends ActiveController
 {
-    public function actionCreateProfile()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    public $modelClass = 'backend\modules\api\models\Teamprofile';
 
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['contentNegotiator'] = [
+
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Yii::$app->response->format = Response::FORMAT_JSON,
+            ]
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionCreate()
+    {
         $model = new Teamprofile();
 
-        $model->scenario = Teamprofile::SCENARIO_CREATE;
         $model->attributes = \Yii::$app->request->post();
 
         if($model->validate())
@@ -28,48 +45,18 @@ class TeamprofileController extends \yii\web\Controller
     }
 
     //Mostra um único post
-    public function actionGetProfile($id)
+    public function actionView($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
         //Modelo correspondente ao id
-        $model = Teamprofile::findOne($id);
+        $model = $this->findModel($id);
 
-        if(count($model) > 0)
-        {
-            //Devolve modelo em JSON
-            return array('status' => true, 'data' => $model);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'Post not found');
-        }
+        return array('status' => true, 'data' => $model);
     }
 
-    //Mostra os eventos todos
-    public function actionGetProfiles()
+    public function actionUpdate($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = $this->findModel($id);
 
-        $profiles = Teamprofile::find()->all();
-
-        if(count($profiles) > 0)
-        {
-            return array('status' => true, 'data' => $profiles);
-        }
-        else
-        {
-            return array('status' => false, 'data' => 'No team profiles found');
-        }
-    }
-
-    public function actionUpdatePost($id)
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $model = Teamprofile::findOne($id);
-
-        $model->scenario = Teamprofile::SCENARIO_UPDATE;
         $model->attributes = \Yii::$app->request->post();
 
         if($model->validate())
@@ -85,28 +72,20 @@ class TeamprofileController extends \yii\web\Controller
     }
 
     //Apaga um evento
-    public function actionDeletePost($id)
+    public function actionDelete($id)
     {
-        $model = Teamprofile::findOne($id);
+        $model = $this->findModel($id);
 
-        if($model != null)
+        $model->delete();
+    }
+
+    protected function findModel($id)
+    {
+        if(($model = Teamprofile::findOne($id)) !== null)
         {
-            foreach($model->comments as $comment)
-            {
-                $comment->delete();
-            }
-
-            foreach($model->posts as $post)
-            {
-                $post->delete();
-            }
-
-            foreach($model->events as $event)
-            {
-                $event->delete();
-            }
+            return $model;
         }
 
-        return $this->redirect(['get-profiles']);
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

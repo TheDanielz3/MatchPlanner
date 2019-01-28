@@ -2,51 +2,100 @@
 
 namespace backend\modules\api\controllers;
 
-use backend\modules\api\models\Post;
-use backend\modules\api\models\User;
+use common\models\LoginForm;
+use common\models\User;
+use frontend\models\SignupForm;
+use Yii;
+use yii\rest\ActiveController;
+use yii\web\Response;
 
-class UserController extends \yii\web\Controller
+class UserController extends ActiveController
 {
-    public function actionIndex()
+    public $modelClass = 'common\models\User';
+
+    public function behaviors()
     {
-        return $this->render('index');
+        $behaviors = parent::behaviors();
+
+        $behaviors['contentNegotiator'] = [
+
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Yii::$app->response->format = Response::FORMAT_JSON,
+            ]
+        ];
+
+        return $behaviors;
     }
 
-    public function actionCreate()
+    //Ver todas as auth_key e se a gerada for igual a alguma dá login
+    public function actionLogin()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = new LoginForm();
 
-        $model = new User();
+        $model->username = Yii::$app->request->post('username');
+        $model->password = Yii::$app->request->post('password');
+        $user = User::findByUsername($model->username, $model->password);
 
-        $model->scenario = User::SCENARIO_CREATE;
-
-        $model->attributes = \Yii::$app->request->post();
-
-        if($model->validate())
+        if($user && $user->validatePassword($model->password))
         {
-            $model->save();
-            return array('status' => true, 'data' => $model);
+            return array('status' => true, 'data' => $user);
         }
         else
         {
-            return array('status' => false, 'data' => $model->getErrors());
+            return array('status' => true, 'data' => $user->getErrors());
+        }
+    }
+
+    //Cria um novo utilizador da framework
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        $model->attributes = Yii::$app->request->post();
+
+        $model->username = Yii::$app->request->post('username');
+        $model->email = Yii::$app->request->post('email');
+        $model->password = Yii::$app->request->post('password');
+
+        if($model->validate())
+        {
+            $user = $model->signup();
+
+            $user->save();
+
+            return array('status' => true, 'data' => $user);
+        }
+        else
+        {
+            return array('status' => true, 'data' => $model->getErrors());
         }
     }
 
     //Mostra todos os utilizadores
-    public function actionView()
+    public function actionView($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = $this->findModel($id);
 
-        $users = User::find()->all();
+        return array('status' => true, 'data' => $model);
+    }
 
-        if(count($users) > 0)
+    //Não apaga utilizador, apenas muda o seu status para 0 desativando a conta
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->status = 0;
+
+        $model->save();
+    }
+
+    protected function findModel($id)
+    {
+        if(($model = User::findOne($id)) !== null)
         {
-            return array('status' => true, 'data' => $users);
+            return $model;
         }
-        else
-        {
-            return array('status' => false, 'data' => 'No users found');
-        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

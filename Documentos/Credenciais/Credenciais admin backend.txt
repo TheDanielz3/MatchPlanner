@@ -1,0 +1,6 @@
+
+username: admin
+password: tesppsiprojetomatchplannerpsi
+
+username: dalpendre
+password: adminmp1999

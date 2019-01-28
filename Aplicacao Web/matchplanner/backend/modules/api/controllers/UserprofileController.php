@@ -3,23 +3,34 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\models\Userprofile;
+use Yii;
+use yii\rest\ActiveController;
+use yii\web\Response;
 
-class UserprofileController extends \yii\web\Controller
+class UserprofileController extends ActiveController
 {
-    public function actionIndex()
+    public $modelClass = 'backend\modules\api\models\Userprofile';
+
+    public function behaviors()
     {
-        return $this->render('index');
+        $behaviors = parent::behaviors();
+
+        $behaviors['contentNegotiator'] = [
+
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Yii::$app->response->format = Response::FORMAT_JSON,
+            ]
+        ];
+
+        return $behaviors;
     }
 
     public function actionCreate()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
         $model = new Userprofile();
 
-        $model->scenario = Userprofile::SCENARIO_CREATE;
-
-        $model->attributes = \Yii::$app->request->post();
+        $model->attributes = Yii::$app->request->post();
 
         if($model->validate())
         {
@@ -32,19 +43,45 @@ class UserprofileController extends \yii\web\Controller
         }
     }
 
-    public function actionView()
+    public function actionView($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = $this->findModel($id);
 
-        $soloprofiles = Userprofile::find()->all();
+        return array('status' => true, 'data' => $model);
+    }
 
-        if(count($soloprofiles) > 0)
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        //$model->attributes = \Yii::$app->request->post();
+
+        if($model->validate())
         {
-            return array('status' => true, 'data' => $soloprofiles);
+            $model->save();
+
+            return array('status' => true, 'data' => $model);
         }
         else
         {
-            return array('status' => false, 'data' => 'No solo profiles found');
+            return array('status' => false, 'data' => $model->getErrors());
         }
+    }
+
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->delete();
+    }
+
+    protected function findModel($id)
+    {
+        if(($model = Userprofile::findOne($id)) !== null)
+        {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

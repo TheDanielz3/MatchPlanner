@@ -15,7 +15,7 @@ $this->title = 'Create Solo Profile';
 //$this->params['breadcrumbs'][] = ['label' => 'Userprofiles', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="userprofile-create">
+<div class="userprofile-create" style="color: #ffffff">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
