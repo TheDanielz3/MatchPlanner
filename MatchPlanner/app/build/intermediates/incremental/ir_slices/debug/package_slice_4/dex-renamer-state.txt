@@ -1,4 +1,0 @@
-#Mon Dec 24 20:53:18 WET 2018
-base.0=/Users/Daniel/Documents/GitHub/MatchPlanner/MatchPlanner/app/build/intermediates/transforms/dexMerger/debug/4
-path.0=classes.dex
-renamed.0=classes.dex
